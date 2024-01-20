@@ -1,7 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:komodotrivia/ui/commons/quiz_category_card.dart';
 
 import '../../generated/assets.dart';
 import '../../utils/strings.dart';
+import '../../utils/styles/simple_shadow.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -27,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${Strings.hi} Sanket',
+                        '${Strings.hi} Komodo!',
                         style: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
@@ -101,6 +106,42 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
+              const SizedBox(height: 24),
+              const Text(
+                Strings.letsplay,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+              ),
+              const SizedBox(height: 24),
+              Expanded(
+                child: GridView.count(
+                  padding: const EdgeInsets.only(top: 20),
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 30,
+                  children: const [
+                    QuizCategoryCard(
+                        title: "Sports",
+                        imagePath: Assets.imagesBasketball,
+                        numberOfQuestions: "20"),
+                    QuizCategoryCard(
+                        title: "Math",
+                        imagePath: Assets.imagesCalculator,
+                        numberOfQuestions: "50"),
+                    QuizCategoryCard(
+                        title: "History",
+                        imagePath: Assets.imagesCalendar,
+                        numberOfQuestions: "50"),
+                    QuizCategoryCard(
+                        title: "Geography",
+                        imagePath: Assets.imagesMap,
+                        numberOfQuestions: "50"),
+                    QuizCategoryCard(
+                        title: "Science",
+                        imagePath: Assets.imagesChemistry,
+                        numberOfQuestions: "50"),
+                  ],
+                ),
+              )
             ],
           ),
         ),

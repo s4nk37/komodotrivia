@@ -4,4 +4,5 @@ class Strings {
       "Let's make this day productive!";
   static const String ranking = "Ranking";
   static const String points = "Points";
+  static const String letsplay = "Let's play!";
 }
