@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:komodotrivia/ui/commons/mcq_question.dart';
+
+import '../../utils/strings.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
@@ -21,7 +24,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
               ),
               Row(
                 children: [
-                  const Icon(Icons.cancel_outlined),
+                  GestureDetector(
+                    child: const Icon(Icons.cancel_outlined),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                   const SizedBox(
                     width: 10,
                   ),
@@ -56,34 +64,22 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 ],
               ),
               SizedBox(
-                height: 50,
+                height: 30,
+              ),
+              Expanded(
+                child: McqQuestion(),
               ),
               Container(
-                height: 200,
-                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                 decoration: BoxDecoration(
-                    color: Colors.lightBlue.shade100,
+                    color: Colors.teal.shade200,
                     borderRadius: BorderRadius.circular(20)),
-                child: Column(
-                  children: [
-                    Transform.translate(
-                      offset: Offset(0, -18),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          CircularProgressIndicator(
-                            value: 10,
-                            color: Colors.teal,
-                          ),
-                          Text("10")
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Text("What is the most popular sports in history?")
-                  ],
+                child: Center(
+                  child: Text(
+                    Strings.next,
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               )
             ],

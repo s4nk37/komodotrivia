@@ -5,4 +5,5 @@ class Strings {
   static const String ranking = "Ranking";
   static const String points = "Points";
   static const String letsplay = "Let's play!";
+  static const String next = "Next";
 }
