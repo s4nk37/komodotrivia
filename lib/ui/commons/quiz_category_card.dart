@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../generated/assets.dart';
+import '../../utils/routes.dart';
 import '../../utils/styles/simple_shadow.dart';
 
 class QuizCategoryCard extends StatelessWidget {
@@ -15,50 +16,55 @@ class QuizCategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 155,
-      width: 155,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            spreadRadius: 1,
-            blurRadius: 10,
-            offset: const Offset(4, 4),
-          ),
-        ],
-        borderRadius: BorderRadius.circular(16),
-      ),
-      padding: const EdgeInsets.only(left: 15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Transform.translate(
-            offset: const Offset(0, -20),
-            child: SimpleShadow(
-              opacity: 0.3, // Default: 0.5
-              color: Colors.black, // Default: Black
-              offset: const Offset(12, 55), // Default: Offset(2, 2)
-              sigma: 14,
-              child: Image.asset(imagePath),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, Routes.questionScreen);
+      },
+      child: Container(
+        height: 155,
+        width: 155,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              spreadRadius: 1,
+              blurRadius: 10,
+              offset: const Offset(4, 4),
             ),
-          ),
-          Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 20,
+          ],
+          borderRadius: BorderRadius.circular(16),
+        ),
+        padding: const EdgeInsets.only(left: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Transform.translate(
+              offset: const Offset(0, -20),
+              child: SimpleShadow(
+                opacity: 0.3, // Default: 0.5
+                color: Colors.black, // Default: Black
+                offset: const Offset(12, 55), // Default: Offset(2, 2)
+                sigma: 14,
+                child: Image.asset(imagePath),
+              ),
             ),
-          ),
-          Text(
-            "${numberOfQuestions} questions",
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 12,
+            Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 20,
+              ),
             ),
-          ),
-        ],
+            Text(
+              "${numberOfQuestions} questions",
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

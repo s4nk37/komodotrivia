@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import './utils/routes.dart';
 
 import 'ui/screens/home_screen.dart';
 
@@ -19,6 +20,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: "Roboto",
       ),
+      routes: Routes.routes,
+      initialRoute: Routes.homeScreen,
       debugShowCheckedModeBanner: false,
       home: const HomeScreen(),
     );
