@@ -2,8 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:komodotrivia/ui/commons/quiz_category_card.dart';
+import 'package:komodotrivia/utils/constants/layout_constants.dart';
+import 'package:komodotrivia/utils/constants/textstyle_constants.dart';
 
 import '../../generated/assets.dart';
+import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/strings_constants.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,13 +21,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.bgWhite,
         body: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding:
+              PaddingConstants.scaffoldPadding.copyWith(top: 24, bottom: 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
@@ -32,13 +36,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Text(
                         '${Strings.hi} Komodo!',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
+                        style: largeTitle,
                       ),
-                      Text(Strings.letsmakethisdayproductive),
+                      Text(
+                        Strings.letsmakethisdayproductive,
+                        style: subTitle,
+                      ),
                     ],
                   ),
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 20,
                     backgroundImage: NetworkImage(
                         'https://avatars.githubusercontent.com/u/55942632?v=4'),
@@ -58,7 +64,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       offset: const Offset(4, 4),
                     ),
                   ],
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius:
+                      BorderRadius.circular(RadiusConstants.commonRadius),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -71,11 +78,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             Strings.ranking,
-                            style: TextStyle(fontWeight: FontWeight.w700),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.fontBlack),
                           ),
                           Text(
                             "643",
-                            style: TextStyle(color: Colors.blue),
+                            style: TextStyle(color: AppColors.blueFont),
                           ),
                         ],
                       )
@@ -93,11 +102,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             Strings.points,
-                            style: TextStyle(fontWeight: FontWeight.w700),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.fontBlack),
                           ),
                           Text(
                             "100",
-                            style: TextStyle(color: Colors.blue),
+                            style: TextStyle(color: AppColors.blueFont),
                           ),
                         ],
                       )
@@ -108,15 +119,18 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 24),
               const Text(
                 Strings.letsplay,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.fontBlack),
               ),
               const SizedBox(height: 24),
               Expanded(
                 child: GridView.count(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(top: 20, right: 10, left: 10),
                   crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 30,
+                  crossAxisSpacing: 17,
+                  mainAxisSpacing: 29,
                   children: const [
                     QuizCategoryCard(
                         title: "Sports",

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:komodotrivia/utils/constants/colors_constants.dart';
+import 'package:komodotrivia/utils/constants/layout_constants.dart';
 
 class OptionCard extends StatelessWidget {
   final String title;
@@ -13,31 +15,42 @@ class OptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 24),
       width: double.infinity,
-      margin: const EdgeInsets.only(bottom: 15),
+      margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: isSelected ? Colors.lightBlue.shade50 : Colors.transparent,
-        borderRadius: BorderRadius.circular(14),
+        color: isSelected ? AppColors.blueBg : Colors.transparent,
+        borderRadius: BorderRadius.circular(RadiusConstants.commonRadius),
         border: Border.all(
-            width: isSelected || isFalse ? 2 : 0.5,
+            width: 2,
             color: isSelected || isFalse
-                ? (isSelected ? Colors.lightBlue.shade300 : Colors.redAccent)
-                : Colors.grey),
+                ? (isSelected ? AppColors.blueFont : AppColors.red)
+                : AppColors.borderGrey),
       ),
       child: Row(
         children: [
-          Text(title),
+          Text(
+            title,
+            style: const TextStyle(
+                fontSize: 18,
+                color: AppColors.fontGrey,
+                fontWeight: FontWeight.w500),
+          ),
           const Spacer(),
           if (isFalse)
             const Icon(
               Icons.cancel,
-              color: Colors.redAccent,
+              color: AppColors.red,
             ),
           if (isSelected)
             const Icon(
               Icons.check_circle,
-              color: Colors.teal,
+              color: AppColors.blueFont,
+            ),
+          if (!(isFalse || isSelected))
+            const Icon(
+              Icons.circle_outlined,
+              color: AppColors.borderGrey,
             ),
         ],
       ),

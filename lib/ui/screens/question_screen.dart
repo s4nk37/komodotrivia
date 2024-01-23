@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:komodotrivia/ui/commons/mcq_question.dart';
+import 'package:komodotrivia/ui/commons/truefalse_question.dart';
+import 'package:komodotrivia/utils/constants/layout_constants.dart';
 
+import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/strings_constants.dart';
 
 class QuestionScreen extends StatefulWidget {
@@ -16,16 +19,30 @@ class _QuestionScreenState extends State<QuestionScreen> {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(10),
+          padding:
+              PaddingConstants.scaffoldPadding.copyWith(top: 24, bottom: 24),
           child: Column(
             children: [
               const SizedBox(
-                height: 20,
+                height: 26,
               ),
+
+              ///PROGRESS BAR
               Row(
                 children: [
                   GestureDetector(
-                    child: const Icon(Icons.cancel_outlined),
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppColors.borderGrey),
+                      ),
+                      child: const Icon(
+                        Icons.close,
+                        color: AppColors.greyBg,
+                        size: 26,
+                      ),
+                    ),
                     onTap: () {
                       Navigator.pop(context);
                     },
@@ -35,12 +52,13 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   ),
                   Expanded(
                     child: Container(
-                      height: 40,
+                      height: 34,
                       padding: const EdgeInsets.symmetric(
                           vertical: 0, horizontal: 10),
                       decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: AppColors.borderGrey),
+                        borderRadius:
+                            BorderRadius.circular(RadiusConstants.barRadius),
                       ),
                       child: const Row(
                         children: [
@@ -48,15 +66,20 @@ class _QuestionScreenState extends State<QuestionScreen> {
                             child: LinearProgressIndicator(
                               value: 0.5,
                               minHeight: 10,
-                              color: Colors.teal,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
+                              color: AppColors.orange,
+                              backgroundColor: AppColors.borderGrey,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(RadiusConstants.barRadius)),
                             ),
                           ),
                           SizedBox(
                             width: 10,
                           ),
-                          Text("5/10")
+                          Text(
+                            "5/10",
+                            style: TextStyle(
+                                color: AppColors.blueFont, fontSize: 12),
+                          )
                         ],
                       ),
                     ),
@@ -66,19 +89,28 @@ class _QuestionScreenState extends State<QuestionScreen> {
               const SizedBox(
                 height: 30,
               ),
+
+              ///QUESTION CARD
               const Expanded(
-                child: McqQuestion(),
+                // child: McqQuestion(),
+                child: TrueFalseQuestion(),
               ),
+
+              ///NEXT BUTTON
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                 decoration: BoxDecoration(
-                    color: Colors.teal.shade200,
-                    borderRadius: BorderRadius.circular(20)),
+                    color: AppColors.blueFont,
+                    borderRadius:
+                        BorderRadius.circular(RadiusConstants.commonRadius)),
                 child: const Center(
                   child: Text(
                     Strings.next,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700),
                   ),
                 ),
               )

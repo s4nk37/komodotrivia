@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:komodotrivia/utils/constants/layout_constants.dart';
 
 import '../../generated/assets.dart';
+import '../../utils/constants/colors_constants.dart';
 import '../../utils/routes.dart';
 import '../../utils/styles/simple_shadow.dart';
 
@@ -21,8 +23,6 @@ class QuizCategoryCard extends StatelessWidget {
         Navigator.pushNamed(context, Routes.questionScreen);
       },
       child: Container(
-        height: 155,
-        width: 155,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -33,7 +33,7 @@ class QuizCategoryCard extends StatelessWidget {
               offset: const Offset(4, 4),
             ),
           ],
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(RadiusConstants.cardRadius),
         ),
         padding: const EdgeInsets.only(left: 15),
         child: Column(
@@ -51,15 +51,15 @@ class QuizCategoryCard extends StatelessWidget {
             ),
             Text(
               title,
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-              ),
+              style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
+                  color: AppColors.fontBlack),
             ),
             Text(
-              "${numberOfQuestions} questions",
-              style: TextStyle(
-                color: Colors.grey,
+              "$numberOfQuestions questions",
+              style: const TextStyle(
+                color: AppColors.greyBg,
                 fontSize: 12,
               ),
             ),

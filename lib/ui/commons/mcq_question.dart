@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:komodotrivia/ui/commons/option_card.dart';
+import 'package:komodotrivia/ui/commons/question_card.dart';
+import 'package:komodotrivia/utils/constants/colors_constants.dart';
+
+import 'option_card.dart';
 
 class McqQuestion extends StatefulWidget {
   const McqQuestion({super.key});
@@ -14,37 +17,13 @@ class _McqQuestionState extends State<McqQuestion> {
     return ListView(
       padding: const EdgeInsets.only(top: 20),
       children: [
-        Container(
-          height: 200,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              color: Colors.lightBlue.shade100,
-              borderRadius: BorderRadius.circular(20)),
-          child: Column(
-            children: [
-              Transform.translate(
-                offset: const Offset(0, -18),
-                child: const Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    CircularProgressIndicator(
-                      value: 10,
-                      color: Colors.teal,
-                    ),
-                    Text("10")
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              const Text("What is the most popular sports in history?")
-            ],
-          ),
-        ),
+        ///QUESTION CARD
+        QuestionCard(),
         const SizedBox(
           height: 20,
         ),
+
+        ///OPTIONS CARDS
         const OptionCard(title: "Football", isSelected: false, isFalse: false),
         const OptionCard(title: "Cricket", isSelected: true, isFalse: false),
         const OptionCard(title: "Basketball", isSelected: false, isFalse: true),

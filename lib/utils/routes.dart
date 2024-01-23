@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:komodotrivia/ui/screens/home_screen.dart';
 
+import '../ui/screens/home_screen.dart';
 import '../ui/screens/question_screen.dart';
 
 class Routes {

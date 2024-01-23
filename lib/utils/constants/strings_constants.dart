@@ -6,4 +6,6 @@ class Strings {
   static const String points = "Points";
   static const String letsplay = "Let's play!";
   static const String next = "Next";
+  static const String trueString = "True";
+  static const String falseString = "False";
 }
