@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../../utils/constants/colors_constants.dart';
 
 class QuestionCard extends StatelessWidget {
-  const QuestionCard({super.key});
+  final String questionText;
+  const QuestionCard({super.key, required this.questionText});
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +50,9 @@ class QuestionCard extends StatelessWidget {
           ),
 
           ///QUESTION TEXT
-          const Text(
-            "What is the most popular sports in history?",
+          Text(
+            // "What is the most popular sports in history?",
+            questionText,
             style: TextStyle(
                 overflow: TextOverflow.ellipsis,
                 fontSize: 18,

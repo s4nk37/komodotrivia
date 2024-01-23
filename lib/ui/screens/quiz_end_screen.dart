@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:komodotrivia/utils/constants/textstyle_constants.dart';
 
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/strings_constants.dart';
+import '../../utils/constants/textstyle_constants.dart';
 
 class QuizEndScreen extends StatefulWidget {
   const QuizEndScreen({super.key});
@@ -37,7 +37,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       Strings.congratulations,
                       style: TextStyle(
                           color: AppColors.fontWhite,

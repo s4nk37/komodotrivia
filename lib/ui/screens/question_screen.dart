@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:komodotrivia/providers/question_provider.dart';
 import 'package:komodotrivia/ui/commons/mcq_question.dart';
-import 'package:komodotrivia/ui/commons/truefalse_question.dart';
 import 'package:komodotrivia/utils/constants/layout_constants.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/strings_constants.dart';
@@ -17,6 +18,7 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionScreenState extends State<QuestionScreen> {
   @override
   Widget build(BuildContext context) {
+    final loadedQuestions = Provider.of<QuestionProvider>(context).questions;
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -61,7 +63,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         borderRadius:
                             BorderRadius.circular(RadiusConstants.barRadius),
                       ),
-                      child: const Row(
+                      child: Row(
                         children: [
                           Expanded(
                             child: LinearProgressIndicator(
@@ -77,7 +79,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                             width: 10,
                           ),
                           Text(
-                            "5/10",
+                            "${loadedQuestions?.length}",
                             style: TextStyle(
                                 color: AppColors.blueFont, fontSize: 12),
                           )
@@ -92,9 +94,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
               ),
 
               ///QUESTION CARD
-              const Expanded(
-                // child: McqQuestion(),
-                child: TrueFalseQuestion(),
+              Expanded(
+                child: McqQuestion(
+                  question: loadedQuestions!.first,
+                ),
+                //child: TrueFalseQuestion(),
               ),
 
               ///NEXT BUTTON

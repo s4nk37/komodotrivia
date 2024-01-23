@@ -1,9 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:komodotrivia/providers/question_provider.dart';
 import 'package:komodotrivia/ui/commons/quiz_category_card.dart';
 import 'package:komodotrivia/utils/constants/layout_constants.dart';
 import 'package:komodotrivia/utils/constants/textstyle_constants.dart';
+import 'package:provider/provider.dart';
 
 import '../../generated/assets.dart';
 import '../../utils/constants/colors_constants.dart';
@@ -17,6 +19,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  init() async {
+    await Provider.of<QuestionProvider>(context, listen: false)
+        .fetchAndSetQuestions();
+  }
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      init();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -83,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: AppColors.fontBlack),
                           ),
                           Text(
-                            "643",
+                            "A++",
                             style: TextStyle(color: AppColors.blueFont),
                           ),
                         ],
@@ -135,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     QuizCategoryCard(
                         title: "Sports",
                         imagePath: Assets.imagesBasketball,
-                        numberOfQuestions: "20"),
+                        numberOfQuestions: "50"),
                     QuizCategoryCard(
                         title: "Math",
                         imagePath: Assets.imagesCalculator,

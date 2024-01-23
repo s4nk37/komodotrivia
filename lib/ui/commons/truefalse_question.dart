@@ -18,7 +18,9 @@ class _TrueFalseQuestionState extends State<TrueFalseQuestion> {
       padding: const EdgeInsets.only(top: 20),
       children: const [
         ///QUESTION CARD
-        QuestionCard(),
+        QuestionCard(
+          questionText: "a",
+        ),
         SizedBox(
           height: 20,
         ),
