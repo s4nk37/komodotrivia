@@ -8,4 +8,6 @@ class Strings {
   static const String next = "Next";
   static const String trueString = "True";
   static const String falseString = "False";
+  static const String congratulations = "Congratulations!";
+  static const String playAgain = "Tap here to Play Again";
 }

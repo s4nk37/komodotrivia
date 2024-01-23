@@ -5,6 +5,7 @@ import 'package:komodotrivia/utils/constants/layout_constants.dart';
 
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/strings_constants.dart';
+import '../../utils/routes.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
@@ -97,20 +98,25 @@ class _QuestionScreenState extends State<QuestionScreen> {
               ),
 
               ///NEXT BUTTON
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                decoration: BoxDecoration(
-                    color: AppColors.blueFont,
-                    borderRadius:
-                        BorderRadius.circular(RadiusConstants.commonRadius)),
-                child: const Center(
-                  child: Text(
-                    Strings.next,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, Routes.quizEndScreen);
+                },
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                  decoration: BoxDecoration(
+                      color: AppColors.blueFont,
+                      borderRadius:
+                          BorderRadius.circular(RadiusConstants.commonRadius)),
+                  child: const Center(
+                    child: Text(
+                      Strings.next,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700),
+                    ),
                   ),
                 ),
               )
