@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:komodotrivia/ui/commons/quiz_category_card.dart';
 
 import '../../generated/assets.dart';
-import '../../utils/strings.dart';
-import '../../utils/styles/simple_shadow.dart';
+import '../../utils/constants/strings_constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

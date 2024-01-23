@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Colors {
+class AppColors {
   //LIGHT THEME
   static const Color bgWhite = Color(0xFFFAFAFA);
   static const Color fontBlack = Color(0xFF1C1C1C);

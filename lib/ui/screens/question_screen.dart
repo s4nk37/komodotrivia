@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:komodotrivia/ui/commons/mcq_question.dart';
 
-import '../../utils/strings.dart';
+import '../../utils/constants/strings_constants.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
@@ -63,10 +63,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              Expanded(
+              const Expanded(
                 child: McqQuestion(),
               ),
               Container(
@@ -75,7 +75,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 decoration: BoxDecoration(
                     color: Colors.teal.shade200,
                     borderRadius: BorderRadius.circular(20)),
-                child: Center(
+                child: const Center(
                   child: Text(
                     Strings.next,
                     style: TextStyle(color: Colors.white),
