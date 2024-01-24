@@ -16,6 +16,8 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
+  int _currentQuestion = 0;
+
   @override
   Widget build(BuildContext context) {
     final loadedQuestions = Provider.of<QuestionProvider>(context).questions;
@@ -67,7 +69,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         children: [
                           Expanded(
                             child: LinearProgressIndicator(
-                              value: 0.5,
+                              value: _currentQuestion / loadedQuestions!.length,
                               minHeight: 10,
                               color: AppColors.orange,
                               backgroundColor: AppColors.borderGrey,
@@ -96,7 +98,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
               ///QUESTION CARD
               Expanded(
                 child: McqQuestion(
-                  question: loadedQuestions!.first,
+                  question: loadedQuestions![_currentQuestion],
                 ),
                 //child: TrueFalseQuestion(),
               ),
@@ -104,7 +106,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
               ///NEXT BUTTON
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, Routes.quizEndScreen);
+                  _currentQuestion++;
+                  setState(() {});
+                  //Navigator.pushNamed(context, Routes.quizEndScreen);
                 },
                 child: Container(
                   padding:

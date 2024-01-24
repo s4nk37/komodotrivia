@@ -1,12 +1,13 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:komodotrivia/providers/question_provider.dart';
-import 'package:komodotrivia/ui/commons/quiz_category_card.dart';
-import 'package:komodotrivia/utils/constants/layout_constants.dart';
-import 'package:komodotrivia/utils/constants/textstyle_constants.dart';
+
 import 'package:provider/provider.dart';
 
+import '../../providers/question_provider.dart';
+import '/ui/commons/quiz_category_card.dart';
+import '../../utils/constants/layout_constants.dart';
+import '../../utils/constants/textstyle_constants.dart';
 import '../../generated/assets.dart';
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/strings_constants.dart';
@@ -148,25 +149,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisSpacing: 29,
                   children: const [
                     QuizCategoryCard(
-                        title: "Sports",
+                        title: Strings.sports,
                         imagePath: Assets.imagesBasketball,
-                        numberOfQuestions: "50"),
+                        numberOfQuestions: 50),
                     QuizCategoryCard(
-                        title: "Math",
+                        title: Strings.math,
                         imagePath: Assets.imagesCalculator,
-                        numberOfQuestions: "50"),
+                        numberOfQuestions: 20),
                     QuizCategoryCard(
-                        title: "History",
+                        title: Strings.history,
                         imagePath: Assets.imagesCalendar,
-                        numberOfQuestions: "50"),
+                        numberOfQuestions: 10),
                     QuizCategoryCard(
-                        title: "Geography",
+                        title: Strings.geography,
                         imagePath: Assets.imagesMap,
-                        numberOfQuestions: "50"),
+                        numberOfQuestions: 20),
                     QuizCategoryCard(
-                        title: "Science",
+                        title: Strings.science,
                         imagePath: Assets.imagesChemistry,
-                        numberOfQuestions: "50"),
+                        numberOfQuestions: 30),
                   ],
                 ),
               )

@@ -3,6 +3,7 @@ import 'package:komodotrivia/providers/question_provider.dart';
 import 'package:provider/provider.dart';
 import './utils/routes.dart';
 
+import 'providers/score_provider.dart';
 import 'ui/screens/home_screen.dart';
 
 void main() {
@@ -18,6 +19,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ListenableProvider<QuestionProvider>(
           create: (_) => QuestionProvider(),
+        ),
+        ListenableProvider<ScoreProvider>(
+          create: (_) => ScoreProvider(),
         ),
       ],
       child: MaterialApp(

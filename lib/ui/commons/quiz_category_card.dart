@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:komodotrivia/utils/constants/layout_constants.dart';
 
-import '../../generated/assets.dart';
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/routes.dart';
 import '../../utils/styles/simple_shadow.dart';
@@ -9,7 +8,7 @@ import '../../utils/styles/simple_shadow.dart';
 class QuizCategoryCard extends StatelessWidget {
   final String imagePath;
   final String title;
-  final String numberOfQuestions;
+  final int numberOfQuestions;
   const QuizCategoryCard(
       {super.key,
       required this.imagePath,

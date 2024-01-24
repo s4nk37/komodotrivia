@@ -5,6 +5,13 @@ class Strings {
   static const String ranking = "Ranking";
   static const String points = "Points";
   static const String letsplay = "Let's play!";
+
+  static const String sports = "Sports";
+  static const String history = "History";
+  static const String geography = "Geography";
+  static const String science = "Science";
+  static const String math = "Math";
+
   static const String next = "Next";
   static const String trueString = "True";
   static const String falseString = "False";

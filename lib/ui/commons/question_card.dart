@@ -1,10 +1,50 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../utils/constants/colors_constants.dart';
 
-class QuestionCard extends StatelessWidget {
+class QuestionCard extends StatefulWidget {
   final String questionText;
   const QuestionCard({super.key, required this.questionText});
+
+  @override
+  State<QuestionCard> createState() => _QuestionCardState();
+}
+
+class _QuestionCardState extends State<QuestionCard> {
+  Timer? _timer;
+  int _remainingSeconds;
+
+  _QuestionCardState({int startSeconds = 30})
+      : _remainingSeconds = startSeconds;
+
+  void _startCountdown() {
+    const oneSecond = Duration(seconds: 1);
+    _timer = Timer.periodic(oneSecond, (Timer timer) {
+      if (_remainingSeconds <= 0) {
+        setState(() {
+          timer.cancel();
+        });
+      } else {
+        setState(() {
+          _remainingSeconds--;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    _startCountdown();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,20 +67,21 @@ class QuestionCard extends StatelessWidget {
                   decoration: const BoxDecoration(
                       shape: BoxShape.circle, color: AppColors.bgWhite),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 53,
                   width: 53,
                   child: CircularProgressIndicator(
-                    value: 0.7,
+                    value: _remainingSeconds / 30,
                     strokeWidth: 6,
                     color: AppColors.blueFont,
                     backgroundColor: AppColors.borderGrey,
                     strokeCap: StrokeCap.round,
                   ),
                 ),
-                const Text(
-                  "10",
-                  style: TextStyle(color: AppColors.fontGrey, fontSize: 16),
+                Text(
+                  "$_remainingSeconds",
+                  style:
+                      const TextStyle(color: AppColors.fontGrey, fontSize: 16),
                 )
               ],
             ),
@@ -52,9 +93,10 @@ class QuestionCard extends StatelessWidget {
           ///QUESTION TEXT
           Text(
             // "What is the most popular sports in history?",
-            questionText,
-            style: TextStyle(
-                overflow: TextOverflow.ellipsis,
+            widget.questionText,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+                overflow: TextOverflow.clip,
                 fontSize: 18,
                 color: AppColors.fontBlack,
                 fontWeight: FontWeight.w700),
