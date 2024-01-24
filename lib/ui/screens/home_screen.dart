@@ -20,16 +20,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  init() async {
-    await Provider.of<QuestionProvider>(context, listen: false)
-        .fetchAndSetQuestions();
-  }
+  // init() async {
+  //   await Provider.of<QuestionProvider>(context, listen: false)
+  //       .fetchAndSetQuestions();
+  // }
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      init();
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    //   init();
+    // });
     super.initState();
   }
 
@@ -150,22 +150,27 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: const [
                     QuizCategoryCard(
                         title: Strings.sports,
+                        id: 21,
                         imagePath: Assets.imagesBasketball,
                         numberOfQuestions: 50),
                     QuizCategoryCard(
                         title: Strings.math,
+                        id: 19,
                         imagePath: Assets.imagesCalculator,
                         numberOfQuestions: 20),
                     QuizCategoryCard(
                         title: Strings.history,
+                        id: 23,
                         imagePath: Assets.imagesCalendar,
                         numberOfQuestions: 10),
                     QuizCategoryCard(
                         title: Strings.geography,
+                        id: 22,
                         imagePath: Assets.imagesMap,
                         numberOfQuestions: 20),
                     QuizCategoryCard(
                         title: Strings.science,
+                        id: 17,
                         imagePath: Assets.imagesChemistry,
                         numberOfQuestions: 30),
                   ],

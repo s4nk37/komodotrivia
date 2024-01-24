@@ -12,13 +12,14 @@ class QuestionProvider with ChangeNotifier {
     return _questions.results;
   }
 
-  Future<void> fetchAndSetQuestions() async {
+  Future<void> fetchAndSetQuestions(
+      {required int categoryId, required int numberOfQuestions}) async {
     final url = Uri.parse(APIConstants.baseUrl);
     try {
       // final response = await http.get(url);
       final response = await dio.get(
         url.toString(),
-        queryParameters: {'amount': 50, 'category': 21},
+        queryParameters: {'amount': numberOfQuestions, 'category': categoryId},
       );
       print(response.data);
       final loadedQuestions = Question.fromJson(response.data);

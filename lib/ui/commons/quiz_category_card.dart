@@ -9,17 +9,20 @@ class QuizCategoryCard extends StatelessWidget {
   final String imagePath;
   final String title;
   final int numberOfQuestions;
+  final int id;
   const QuizCategoryCard(
       {super.key,
       required this.imagePath,
       required this.title,
-      required this.numberOfQuestions});
+      required this.numberOfQuestions,
+      required this.id});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, Routes.questionScreen);
+        Navigator.pushNamed(context, Routes.questionScreen,
+            arguments: [id, numberOfQuestions]);
       },
       child: Container(
         decoration: BoxDecoration(
