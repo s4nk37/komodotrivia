@@ -20,6 +20,7 @@ class _McqQuestionState extends State<McqQuestion> {
         title: widget.question.incorrectAnswers![i],
         isSelected: false,
         isFalse: true,
+        onTap: () {},
       ));
     }
 
@@ -27,8 +28,13 @@ class _McqQuestionState extends State<McqQuestion> {
       title: widget.question.correctAnswer!,
       isSelected: true,
       isFalse: false,
+      onTap: () {},
     ));
-    options.shuffle();
+    if (widget.question.type == "multiple") {
+      options.shuffle();
+    } else {
+      options.reversed;
+    }
     return options;
   }
 

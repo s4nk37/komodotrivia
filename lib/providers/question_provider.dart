@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
@@ -16,16 +18,25 @@ class QuestionProvider with ChangeNotifier {
       {required int categoryId, required int numberOfQuestions}) async {
     final url = Uri.parse(APIConstants.baseUrl);
     try {
-      // final response = await http.get(url);
+      print("API CALLED");
       final response = await dio.get(
         url.toString(),
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        ),
         queryParameters: {'amount': numberOfQuestions, 'category': categoryId},
       );
-      print(response.data);
-      final loadedQuestions = Question.fromJson(response.data);
-      print(loadedQuestions.results!.length);
-      _questions = loadedQuestions;
-      notifyListeners();
+      print("GOT RESPONSE: $response");
+      if (response.statusCode == 200) {
+        final data = json.decode(response.data);
+        final loadedQuestions = Question.fromJson(data);
+        _questions = loadedQuestions;
+        notifyListeners();
+      } else {
+        print("GOT ERROR RESPONSE: ${response.statusCode}");
+      }
     } catch (error) {
       throw (error);
     }

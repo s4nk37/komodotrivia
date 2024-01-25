@@ -6,13 +6,13 @@ class OptionCard extends StatefulWidget {
   final String title;
   final bool isSelected;
   final bool isFalse;
-  // final Function onTap;
+  final Function onTap;
   const OptionCard({
     super.key,
     required this.title,
     required this.isSelected,
     required this.isFalse,
-    //required this.onTap,
+    required this.onTap,
   });
 
   @override

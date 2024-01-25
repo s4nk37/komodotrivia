@@ -30,7 +30,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
             future: Provider.of<QuestionProvider>(context).fetchAndSetQuestions(
                 categoryId: data[0], numberOfQuestions: data[1]),
             builder: (ctx, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.connectionState == ConnectionState.done &&
+                  snapshot.hasData) {
                 return Padding(
                   padding: PaddingConstants.scaffoldPadding
                       .copyWith(top: 24, bottom: 24),
@@ -146,7 +147,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     ],
                   ),
                 );
+              } else if (snapshot.hasError) {
+                return const Center(
+                  child: Text("Connection Timeout"),
+                );
               } else {
+                print(snapshot.error);
                 return Shimmer.fromColors(
                   baseColor: AppColors.borderGrey,
                   highlightColor: AppColors.blueBg,
@@ -230,7 +236,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                           ),
                         ),
                         const SizedBox(
-                          height: 30,
+                          height: 40,
                         ),
                         Container(
                           height: 60,

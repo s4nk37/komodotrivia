@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:komodotrivia/providers/question_provider.dart';
 import 'package:komodotrivia/utils/constants/layout_constants.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/routes.dart';

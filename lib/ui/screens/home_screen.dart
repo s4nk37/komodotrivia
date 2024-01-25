@@ -1,10 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
-import 'package:provider/provider.dart';
-
-import '../../providers/question_provider.dart';
 import '/ui/commons/quiz_category_card.dart';
 import '../../utils/constants/layout_constants.dart';
 import '../../utils/constants/textstyle_constants.dart';
@@ -20,19 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // init() async {
-  //   await Provider.of<QuestionProvider>(context, listen: false)
-  //       .fetchAndSetQuestions();
-  // }
-
-  @override
-  void initState() {
-    // WidgetsBinding.instance.addPostFrameCallback((_) async {
-    //   init();
-    // });
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

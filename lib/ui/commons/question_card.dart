@@ -91,15 +91,18 @@ class _QuestionCardState extends State<QuestionCard> {
           ),
 
           ///QUESTION TEXT
-          Text(
-            // "What is the most popular sports in history?",
-            widget.questionText,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-                overflow: TextOverflow.clip,
-                fontSize: 18,
-                color: AppColors.fontBlack,
-                fontWeight: FontWeight.w700),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: Text(
+              // "What is the most popular sports in history?",
+              widget.questionText,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  overflow: TextOverflow.clip,
+                  fontSize: 18,
+                  color: AppColors.fontBlack,
+                  fontWeight: FontWeight.w700),
+            ),
           )
         ],
       ),

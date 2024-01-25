@@ -26,9 +26,9 @@ class _TrueFalseQuestionState extends State<TrueFalseQuestion> {
         ),
 
         ///OPTIONS CARDS
-        OptionCard(title: Strings.trueString, isSelected: false, isFalse: true),
-        OptionCard(
-            title: Strings.falseString, isSelected: true, isFalse: false),
+        // OptionCard(title: Strings.trueString, isSelected: false, isFalse: true),
+        // OptionCard(
+        //     title: Strings.falseString, isSelected: true, isFalse: false),
       ],
     );
   }
