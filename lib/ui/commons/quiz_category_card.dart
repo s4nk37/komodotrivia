@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:komodotrivia/providers/question_provider.dart';
 import 'package:komodotrivia/utils/constants/layout_constants.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/question_provider.dart';
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/routes.dart';
 import '../../utils/styles/simple_shadow.dart';
@@ -23,8 +23,10 @@ class QuizCategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, Routes.questionScreen,
-            arguments: [id, numberOfQuestions]);
+        Provider.of<QuestionProvider>(context, listen: false)
+            .fetchAndSetQuestions(
+                categoryId: id, numberOfQuestions: numberOfQuestions);
+        Navigator.pushNamed(context, Routes.questionScreen);
       },
       child: Container(
         decoration: BoxDecoration(
