@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:html_unescape/html_unescape.dart';
 
 class APIConstants {
   static const String baseUrl = "https://opentdb.com";
@@ -15,3 +16,5 @@ final dio = Dio(
     },
   ),
 );
+
+var unescape = HtmlUnescape();
