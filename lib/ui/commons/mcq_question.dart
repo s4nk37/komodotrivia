@@ -20,7 +20,7 @@ class _McqQuestionState extends State<McqQuestion> {
 
   onTap() {
     reveal = true;
-    print("REVEALED");
+    print("REVEALED : $reveal");
     setState(() {});
   }
 
@@ -66,7 +66,7 @@ class _McqQuestionState extends State<McqQuestion> {
           height: 20,
         ),
 
-        // ///OPTIONS
+        // // ///OPTIONS
         // OptionCard(
         //     model: OptionModel(
         //         onTap: onTap, title: "a", isFalse: true, revealAnswer: reveal)),
@@ -81,10 +81,11 @@ class _McqQuestionState extends State<McqQuestion> {
         //         revealAnswer: reveal)),
         // OptionCard(
         //     model: OptionModel(
-        //         onTap: onTap, title: "d", isFalse: true, revealAnswer: reveal))
+        //         onTap: onTap, title: "d", isFalse: true, revealAnswer: reveal)),
+        // ...options
         Column(
-          children: options,
-        )
+          children: List.generate(options.length, (index) => options[index]),
+        ),
       ],
     );
   }
@@ -128,7 +129,7 @@ class _OptionCardState extends State<OptionCard> {
     return GestureDetector(
       onTap: () {
         widget.model.onTap();
-        print(widget.model.revealAnswer);
+        print("Revel: ${widget.model.revealAnswer}");
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 24),
