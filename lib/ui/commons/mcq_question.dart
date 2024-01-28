@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:komodotrivia/ui/commons/question_card.dart';
+import '../../ui/commons/question_card.dart';
 
 import '../../models/question_model.dart';
+import '../../utils/constants/colors_constants.dart';
+import '../../utils/constants/layout_constants.dart';
 import 'option_card.dart';
 
 class McqQuestion extends StatefulWidget {
@@ -13,29 +15,42 @@ class McqQuestion extends StatefulWidget {
 }
 
 class _McqQuestionState extends State<McqQuestion> {
-  List<OptionCard> getOptions() {
-    List<OptionCard> options = [];
-    for (int i = 0; i < widget.question.incorrectAnswers!.length; i++) {
-      options.add(OptionCard(
-        title: widget.question.incorrectAnswers![i],
-        isSelected: false,
-        isFalse: true,
-        onTap: () {},
-      ));
-    }
+  List<OptionCard> options = [];
+  bool reveal = false;
 
-    options.add(OptionCard(
-      title: widget.question.correctAnswer!,
-      isSelected: true,
-      isFalse: false,
-      onTap: () {},
-    ));
-    if (widget.question.type == "multiple") {
-      options.shuffle();
-    } else {
-      options.reversed;
+  onTap() {
+    reveal = true;
+    print("REVEALED");
+    setState(() {});
+  }
+
+  addOptions() {
+    for (int i = 0; i < widget.question.incorrectAnswers!.length; i++) {
+      options.add(
+        OptionCard(
+          model: OptionModel(
+              onTap: onTap,
+              title: widget.question.incorrectAnswers![i],
+              isFalse: true,
+              revealAnswer: reveal),
+        ),
+      );
     }
-    return options;
+    options.add(OptionCard(
+      model: OptionModel(
+          onTap: onTap,
+          title: widget.question.correctAnswer!,
+          isFalse: false,
+          revealAnswer: reveal),
+    ));
+    options.shuffle();
+  }
+
+  @override
+  void initState() {
+    reveal = false;
+    addOptions();
+    super.initState();
   }
 
   @override
@@ -51,13 +66,122 @@ class _McqQuestionState extends State<McqQuestion> {
           height: 20,
         ),
 
-        ///OPTIONS CARDS
-        ...getOptions()
-        // OptionCard(title: widget.question., isSelected: false, isFalse: false),
-        // OptionCard(title: "Cricket", isSelected: true, isFalse: false),
-        // OptionCard(title: "Basketball", isSelected: false, isFalse: true),
-        // OptionCard(title: "Tennis", isSelected: false, isFalse: false),
+        // ///OPTIONS
+        // OptionCard(
+        //     model: OptionModel(
+        //         onTap: onTap, title: "a", isFalse: true, revealAnswer: reveal)),
+        // OptionCard(
+        //     model: OptionModel(
+        //         onTap: onTap, title: "b", isFalse: true, revealAnswer: reveal)),
+        // OptionCard(
+        //     model: OptionModel(
+        //         onTap: onTap,
+        //         title: "c",
+        //         isFalse: false,
+        //         revealAnswer: reveal)),
+        // OptionCard(
+        //     model: OptionModel(
+        //         onTap: onTap, title: "d", isFalse: true, revealAnswer: reveal))
+        Column(
+          children: options,
+        )
       ],
+    );
+  }
+}
+
+class OptionModel {
+  final String title;
+  final bool isFalse;
+  bool revealAnswer;
+  final Function onTap;
+
+  OptionModel({
+    required this.onTap,
+    required this.title,
+    required this.isFalse,
+    required this.revealAnswer,
+  });
+}
+
+// import 'package:flutter/material.dart';
+// import 'package:komodotrivia/utils/constants/colors_constants.dart';
+// import 'package:komodotrivia/utils/constants/layout_constants.dart';
+//
+// import 'mcq_question.dart';
+
+class OptionCard extends StatefulWidget {
+  final OptionModel model;
+
+  const OptionCard({
+    super.key,
+    required this.model,
+  });
+
+  @override
+  State<OptionCard> createState() => _OptionCardState();
+}
+
+class _OptionCardState extends State<OptionCard> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        widget.model.onTap();
+        print(widget.model.revealAnswer);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 24),
+        width: double.infinity,
+        margin: const EdgeInsets.only(bottom: 12),
+        decoration: BoxDecoration(
+          color: widget.model.revealAnswer
+              ? (widget.model.isFalse ? Colors.transparent : AppColors.blueBg)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(RadiusConstants.commonRadius),
+          border: Border.all(
+              width: 2,
+              color: widget.model.revealAnswer
+                  ? (widget.model.isFalse ? AppColors.red : AppColors.blueFont)
+                  : AppColors.borderGrey),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Text(
+                widget.model.title,
+                overflow: TextOverflow.clip,
+                style: const TextStyle(
+                    fontSize: 18,
+                    color: AppColors.fontGrey,
+                    fontWeight: FontWeight.w500),
+              ),
+            ),
+            Visibility(
+                visible: widget.model.revealAnswer,
+                child: Column(
+                  children: [
+                    if (widget.model.isFalse)
+                      const Icon(
+                        Icons.cancel,
+                        color: AppColors.red,
+                      ),
+                    if (!widget.model.isFalse)
+                      const Icon(
+                        Icons.check_circle,
+                        color: AppColors.blueFont,
+                      ),
+                  ],
+                )),
+            if (!widget.model.revealAnswer)
+              const Icon(
+                Icons.circle_outlined,
+                color: AppColors.borderGrey,
+              ),
+          ],
+        ),
+      ),
     );
   }
 }
