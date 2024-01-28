@@ -4,7 +4,6 @@ import '../../ui/commons/question_card.dart';
 import '../../models/question_model.dart';
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/layout_constants.dart';
-import 'option_card.dart';
 
 class McqQuestion extends StatefulWidget {
   final Results question;

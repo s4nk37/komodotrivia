@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:komodotrivia/models/quiz_response_model.dart';
 
 import '../models/question_model.dart';
 import '../utils/constants/api_constants.dart';
@@ -16,8 +17,11 @@ class QuestionProvider with ChangeNotifier {
     return _questions;
   }
 
-  Future<void> fetchAndSetQuestions(
-      {required int categoryId, required int numberOfQuestions}) async {
+  List<QuizResults> _quizResults = [];
+
+  List<QuizResults>? get quizResults => _quizResults;
+
+  Future<void> fetchAndSetQuestions({required int categoryId, required int numberOfQuestions}) async {
     _isLoading = true;
 
     try {
@@ -35,8 +39,12 @@ class QuestionProvider with ChangeNotifier {
       if (response.statusCode == 200) {
         print("GOT RESPONSE: ${response.data}");
 
-        final loadedQuestions = QuestionResponse.fromJson(response.data);
-        _questions = loadedQuestions.results;
+        // final loadedQuestions = QuizResponseModel.fromJson(response.data);
+        _quizResults.addAll(QuizResponseModel.fromJson(response.data).results ?? []);
+        for(var element in _quizResults){
+          element.incorrectAnswers?.add(element.correctAnswer ?? '');
+          element.incorrectAnswers?.shuffle();
+        }
         _isLoading = false;
         notifyListeners();
       } else {

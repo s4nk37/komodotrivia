@@ -20,8 +20,10 @@ class QuestionResponse {
       });
     }
   }
+
   num? _responseCode;
   List<Results>? _results;
+
   QuestionResponse copyWith({
     num? responseCode,
     List<Results>? results,
@@ -30,7 +32,9 @@ class QuestionResponse {
         responseCode: responseCode ?? _responseCode,
         results: results ?? _results,
       );
+
   num? get responseCode => _responseCode;
+
   List<Results>? get results => _results;
 
   Map<String, dynamic> toJson() {
@@ -73,16 +77,16 @@ class Results {
     _category = json['category'];
     _question = json['question'];
     _correctAnswer = json['correct_answer'];
-    _incorrectAnswers = json['incorrect_answers'] != null
-        ? json['incorrect_answers'].cast<String>()
-        : [];
+    _incorrectAnswers = json['incorrect_answers'] != null ? json['incorrect_answers'].cast<String>() : [];
   }
+
   String? _type;
   String? _difficulty;
   String? _category;
   String? _question;
   String? _correctAnswer;
   List<String>? _incorrectAnswers;
+
   Results copyWith({
     String? type,
     String? difficulty,
@@ -99,11 +103,17 @@ class Results {
         correctAnswer: correctAnswer ?? _correctAnswer,
         incorrectAnswers: incorrectAnswers ?? _incorrectAnswers,
       );
+
   String? get type => _type;
+
   String? get difficulty => _difficulty;
+
   String? get category => _category;
+
   String? get question => unescape.convert(_question ?? "");
+
   String? get correctAnswer => unescape.convert(_correctAnswer ?? "");
+
   // List<String>? get incorrectAnswers => _incorrectAnswers;
   List<String>? get incorrectAnswers {
     List<String> _temp = [];
