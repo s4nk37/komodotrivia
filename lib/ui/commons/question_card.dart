@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:komodotrivia/providers/score_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/constants/colors_constants.dart';
 
@@ -16,13 +18,14 @@ class _QuestionCardState extends State<QuestionCard> {
   Timer? _timer;
   int _remainingSeconds;
 
-  _QuestionCardState({int startSeconds = 30})
+  _QuestionCardState({int startSeconds = 10})
       : _remainingSeconds = startSeconds;
 
   void _startCountdown() {
     const oneSecond = Duration(seconds: 1);
     _timer = Timer.periodic(oneSecond, (Timer timer) {
       if (_remainingSeconds <= 0) {
+        Provider.of<ScoreProvider>(context, listen: false).reveal();
         setState(() {
           timer.cancel();
         });
