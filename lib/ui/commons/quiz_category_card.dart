@@ -3,6 +3,7 @@ import 'package:komodotrivia/utils/constants/layout_constants.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/question_provider.dart';
+import '../../providers/score_provider.dart';
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/routes.dart';
 import '../../utils/styles/simple_shadow.dart';
@@ -21,11 +22,14 @@ class QuizCategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var scoreProvider = Provider.of<ScoreProvider>(context, listen: false);
     return GestureDetector(
       onTap: () {
         Provider.of<QuestionProvider>(context, listen: false)
             .fetchAndSetQuestions(
                 categoryId: id, numberOfQuestions: numberOfQuestions);
+        scoreProvider.totalQuestions = numberOfQuestions;
+        scoreProvider.reset();
         Navigator.pushNamed(context, Routes.questionScreen);
       },
       child: Container(

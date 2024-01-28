@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/score_provider.dart';
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/strings_constants.dart';
 import '../../utils/constants/textstyle_constants.dart';
@@ -14,6 +16,8 @@ class QuizEndScreen extends StatefulWidget {
 class _QuizEndScreenState extends State<QuizEndScreen> {
   @override
   Widget build(BuildContext context) {
+    var scoreprovider = Provider.of<ScoreProvider>(context);
+
     return Scaffold(
       backgroundColor: AppColors.bgWhite,
       extendBodyBehindAppBar: true,
@@ -64,7 +68,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    "Score: 10/50",
+                    "Score: ${scoreprovider.correctAnswers}/${scoreprovider.totalQuestions}",
                     style: largeTitle.copyWith(color: AppColors.orange),
                   ),
                   const CircleAvatar(
