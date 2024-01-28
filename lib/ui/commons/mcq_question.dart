@@ -1,54 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:komodotrivia/models/quiz_response_model.dart';
 import '../../ui/commons/question_card.dart';
-
-import '../../models/question_model.dart';
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/layout_constants.dart';
 
 class McqQuestion extends StatefulWidget {
-  final Results question;
-  const McqQuestion({super.key, required this.question});
+  final QuizResults question;
+  final Function(String selectedAns) onTap;
+
+  const McqQuestion({super.key, required this.question, required this.onTap});
 
   @override
   State<McqQuestion> createState() => _McqQuestionState();
 }
 
 class _McqQuestionState extends State<McqQuestion> {
-  List<OptionCard> options = [];
-  bool reveal = false;
+  // onTap() {
+  //   reveal = true;
+  //   print("REVEALED : $reveal");
+  //   setState(() {});
+  // }
 
-  onTap() {
-    reveal = true;
-    print("REVEALED : $reveal");
-    setState(() {});
-  }
-
-  addOptions() {
-    for (int i = 0; i < widget.question.incorrectAnswers!.length; i++) {
-      options.add(
-        OptionCard(
-          model: OptionModel(
-              onTap: onTap,
-              title: widget.question.incorrectAnswers![i],
-              isFalse: true,
-              revealAnswer: reveal),
-        ),
-      );
-    }
-    options.add(OptionCard(
-      model: OptionModel(
-          onTap: onTap,
-          title: widget.question.correctAnswer!,
-          isFalse: false,
-          revealAnswer: reveal),
-    ));
-    options.shuffle();
-  }
+  // addOptions() {
+  //   for (int i = 0; i < widget.question.incorrectAnswers!.length; i++) {
+  //     options.add(
+  //       OptionCard(
+  //         model: OptionModel(
+  //             onTap: onTap,
+  //             title: widget.question.incorrectAnswers![i],
+  //             isFalse: true,
+  //             revealAnswer: reveal),
+  //       ),
+  //     );
+  //   }
+  //   options.add(OptionCard(
+  //     model: OptionModel(
+  //         onTap: onTap,
+  //         title: widget.question.correctAnswer!,
+  //         isFalse: false,
+  //         revealAnswer: reveal),
+  //   ));
+  //   options.shuffle();
+  // }
 
   @override
   void initState() {
-    reveal = false;
-    addOptions();
+    // reveal = false;
+    // addOptions();
     super.initState();
   }
 
@@ -83,7 +81,17 @@ class _McqQuestionState extends State<McqQuestion> {
         //         onTap: onTap, title: "d", isFalse: true, revealAnswer: reveal)),
         // ...options
         Column(
-          children: List.generate(options.length, (index) => options[index]),
+          children: List.generate(widget.question.incorrectAnswers?.length ?? 0, (index) {
+            return OptionCard(
+              model: OptionModel(
+                  title: widget.question.incorrectAnswers?[index] ?? '',
+                  selectedAnswer: widget.question.selectedAnswers ?? '',
+                  correctAnswer: widget.question.correctAnswer ?? ''),
+              onTap: (selectedAns) {
+                widget.onTap(selectedAns);
+              },
+            );
+          }),
         ),
       ],
     );
@@ -92,15 +100,18 @@ class _McqQuestionState extends State<McqQuestion> {
 
 class OptionModel {
   final String title;
-  final bool isFalse;
-  bool revealAnswer;
-  final Function onTap;
+
+  // final bool isFalse;
+  // bool revealAnswer;
+  final String selectedAnswer;
+  final String correctAnswer;
 
   OptionModel({
-    required this.onTap,
     required this.title,
-    required this.isFalse,
-    required this.revealAnswer,
+    required this.selectedAnswer,
+    required this.correctAnswer,
+    // required this.isFalse,
+    // required this.revealAnswer,
   });
 }
 
@@ -110,39 +121,35 @@ class OptionModel {
 //
 // import 'mcq_question.dart';
 
-class OptionCard extends StatefulWidget {
+class OptionCard extends StatelessWidget {
   final OptionModel model;
+  final Function(String selectedAns) onTap;
 
   const OptionCard({
     super.key,
     required this.model,
+    required this.onTap,
   });
 
-  @override
-  State<OptionCard> createState() => _OptionCardState();
-}
-
-class _OptionCardState extends State<OptionCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.model.onTap();
-        print("Revel: ${widget.model.revealAnswer}");
+        onTap(model.title);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 24),
         width: double.infinity,
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
-          color: widget.model.revealAnswer
-              ? (widget.model.isFalse ? Colors.transparent : AppColors.blueBg)
+          color: model.selectedAnswer.isNotEmpty
+              ? (model.selectedAnswer == model.correctAnswer ? AppColors.blueBg : Colors.transparent)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(RadiusConstants.commonRadius),
           border: Border.all(
               width: 2,
-              color: widget.model.revealAnswer
-                  ? (widget.model.isFalse ? AppColors.red : AppColors.blueFont)
+              color: model.selectedAnswer.isNotEmpty
+                  ? (model.selectedAnswer == model.correctAnswer ? AppColors.blueFont : AppColors.red)
                   : AppColors.borderGrey),
         ),
         child: Row(
@@ -150,31 +157,29 @@ class _OptionCardState extends State<OptionCard> {
           children: [
             Expanded(
               child: Text(
-                widget.model.title,
+                model.title,
                 overflow: TextOverflow.clip,
-                style: const TextStyle(
-                    fontSize: 18,
-                    color: AppColors.fontGrey,
-                    fontWeight: FontWeight.w500),
+                style: const TextStyle(fontSize: 18, color: AppColors.fontGrey, fontWeight: FontWeight.w500),
               ),
             ),
             Visibility(
-                visible: widget.model.revealAnswer,
-                child: Column(
-                  children: [
-                    if (widget.model.isFalse)
-                      const Icon(
-                        Icons.cancel,
-                        color: AppColors.red,
-                      ),
-                    if (!widget.model.isFalse)
-                      const Icon(
-                        Icons.check_circle,
-                        color: AppColors.blueFont,
-                      ),
-                  ],
-                )),
-            if (!widget.model.revealAnswer)
+              visible: model.selectedAnswer.isNotEmpty,
+              child: Column(
+                children: [
+                  if (model.selectedAnswer != model.correctAnswer)
+                    const Icon(
+                      Icons.cancel,
+                      color: AppColors.red,
+                    ),
+                  if (model.selectedAnswer == model.correctAnswer)
+                    const Icon(
+                      Icons.check_circle,
+                      color: AppColors.blueFont,
+                    ),
+                ],
+              ),
+            ),
+            if (model.selectedAnswer.isEmpty)
               const Icon(
                 Icons.circle_outlined,
                 color: AppColors.borderGrey,

@@ -17,9 +17,10 @@ class QuestionProvider with ChangeNotifier {
     return _questions;
   }
 
+  List<QuizResults>? get quizResults => _quizResults;
   List<QuizResults> _quizResults = [];
 
-  List<QuizResults>? get quizResults => _quizResults;
+
 
   Future<void> fetchAndSetQuestions({required int categoryId, required int numberOfQuestions}) async {
     _isLoading = true;
@@ -38,9 +39,9 @@ class QuestionProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         print("GOT RESPONSE: ${response.data}");
-
-        // final loadedQuestions = QuizResponseModel.fromJson(response.data);
+        _quizResults.clear();
         _quizResults.addAll(QuizResponseModel.fromJson(response.data).results ?? []);
+
         for(var element in _quizResults){
           element.incorrectAnswers?.add(element.correctAnswer ?? '');
           element.incorrectAnswers?.shuffle();
@@ -54,4 +55,10 @@ class QuestionProvider with ChangeNotifier {
       rethrow;
     }
   }
+
+  void addSelectedAnswer({required int index, required String selectedAns}){
+    _quizResults[index].selectedAnswers = selectedAns;
+    notifyListeners();
+  }
+
 }

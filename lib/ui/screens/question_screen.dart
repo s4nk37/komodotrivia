@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:komodotrivia/models/quiz_response_model.dart';
 import 'package:komodotrivia/providers/question_provider.dart';
 import 'package:komodotrivia/ui/commons/mcq_question.dart';
 import '../../utils/constants/layout_constants.dart';
@@ -29,8 +30,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 baseColor: AppColors.borderGrey,
                 highlightColor: AppColors.blueBg,
                 child: Padding(
-                  padding: PaddingConstants.scaffoldPadding
-                      .copyWith(top: 24, bottom: 24),
+                  padding: PaddingConstants.scaffoldPadding.copyWith(top: 24, bottom: 24),
                   child: Column(
                     children: [
                       const SizedBox(
@@ -58,12 +58,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                           Expanded(
                             child: Container(
                               height: 34,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 0, horizontal: 10),
+                              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                               decoration: BoxDecoration(
                                 border: Border.all(color: AppColors.borderGrey),
-                                borderRadius: BorderRadius.circular(
-                                    RadiusConstants.barRadius),
+                                borderRadius: BorderRadius.circular(RadiusConstants.barRadius),
                               ),
                               child: const Row(
                                 children: [
@@ -73,9 +71,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                       minHeight: 10,
                                       color: AppColors.orange,
                                       backgroundColor: AppColors.borderGrey,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(
-                                              RadiusConstants.barRadius)),
+                                      borderRadius: BorderRadius.all(Radius.circular(RadiusConstants.barRadius)),
                                     ),
                                   ),
                                   SizedBox(
@@ -83,9 +79,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                   ),
                                   Text(
                                     "",
-                                    style: TextStyle(
-                                        color: AppColors.blueFont,
-                                        fontSize: 12),
+                                    style: TextStyle(color: AppColors.blueFont, fontSize: 12),
                                   )
                                 ],
                               ),
@@ -111,77 +105,59 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       ),
                       Container(
                         height: 60,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 24),
+                        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 24),
                         width: double.infinity,
                         margin: const EdgeInsets.only(bottom: 12),
                         decoration: BoxDecoration(
                           color: AppColors.blueBg,
-                          borderRadius: BorderRadius.circular(
-                              RadiusConstants.commonRadius),
-                          border:
-                              Border.all(width: 2, color: AppColors.borderGrey),
+                          borderRadius: BorderRadius.circular(RadiusConstants.commonRadius),
+                          border: Border.all(width: 2, color: AppColors.borderGrey),
                         ),
                       ),
                       Container(
                         height: 55,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 24),
+                        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 24),
                         width: double.infinity,
                         margin: const EdgeInsets.only(bottom: 12),
                         decoration: BoxDecoration(
                           color: AppColors.blueBg,
-                          borderRadius: BorderRadius.circular(
-                              RadiusConstants.commonRadius),
-                          border:
-                              Border.all(width: 2, color: AppColors.borderGrey),
+                          borderRadius: BorderRadius.circular(RadiusConstants.commonRadius),
+                          border: Border.all(width: 2, color: AppColors.borderGrey),
                         ),
                       ),
                       Container(
                         height: 55,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 24),
+                        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 24),
                         width: double.infinity,
                         margin: const EdgeInsets.only(bottom: 12),
                         decoration: BoxDecoration(
                           color: AppColors.blueBg,
-                          borderRadius: BorderRadius.circular(
-                              RadiusConstants.commonRadius),
-                          border:
-                              Border.all(width: 2, color: AppColors.borderGrey),
+                          borderRadius: BorderRadius.circular(RadiusConstants.commonRadius),
+                          border: Border.all(width: 2, color: AppColors.borderGrey),
                         ),
                       ),
                       Container(
                         height: 55,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 24),
+                        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 24),
                         width: double.infinity,
                         margin: const EdgeInsets.only(bottom: 12),
                         decoration: BoxDecoration(
                           color: AppColors.blueBg,
-                          borderRadius: BorderRadius.circular(
-                              RadiusConstants.commonRadius),
-                          border:
-                              Border.all(width: 2, color: AppColors.borderGrey),
+                          borderRadius: BorderRadius.circular(RadiusConstants.commonRadius),
+                          border: Border.all(width: 2, color: AppColors.borderGrey),
                         ),
                       ),
                       const Spacer(),
 
                       ///NEXT BUTTON
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 10),
-                        decoration: BoxDecoration(
-                            color: AppColors.blueFont,
-                            borderRadius: BorderRadius.circular(
-                                RadiusConstants.commonRadius)),
+                        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                        decoration:
+                            BoxDecoration(color: AppColors.blueFont, borderRadius: BorderRadius.circular(RadiusConstants.commonRadius)),
                         child: const Center(
                           child: Text(
                             Strings.next,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700),
+                            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
                           ),
                         ),
                       )
@@ -190,8 +166,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 ),
               )
             : Padding(
-                padding: PaddingConstants.scaffoldPadding
-                    .copyWith(top: 24, bottom: 24),
+                padding: PaddingConstants.scaffoldPadding.copyWith(top: 24, bottom: 24),
                 child: Column(
                   children: [
                     const SizedBox(
@@ -224,34 +199,28 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         Expanded(
                           child: Container(
                             height: 34,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 0, horizontal: 10),
+                            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                             decoration: BoxDecoration(
                               border: Border.all(color: AppColors.borderGrey),
-                              borderRadius: BorderRadius.circular(
-                                  RadiusConstants.barRadius),
+                              borderRadius: BorderRadius.circular(RadiusConstants.barRadius),
                             ),
                             child: Row(
                               children: [
                                 Expanded(
                                   child: LinearProgressIndicator(
-                                    value: (_currentQuestion + 1) /
-                                        response.questions!.length,
+                                    value: (_currentQuestion + 1) / (response.quizResults?.length ?? 0),
                                     minHeight: 10,
                                     color: AppColors.orange,
                                     backgroundColor: AppColors.borderGrey,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(
-                                            RadiusConstants.barRadius)),
+                                    borderRadius: const BorderRadius.all(Radius.circular(RadiusConstants.barRadius)),
                                   ),
                                 ),
                                 const SizedBox(
                                   width: 10,
                                 ),
                                 Text(
-                                  "${_currentQuestion + 1}/${response.questions!.length}",
-                                  style: const TextStyle(
-                                      color: AppColors.blueFont, fontSize: 12),
+                                  "${_currentQuestion + 1}/${response.quizResults?.length}",
+                                  style: const TextStyle(color: AppColors.blueFont, fontSize: 12),
                                 )
                               ],
                             ),
@@ -267,7 +236,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     Expanded(
                       key: UniqueKey(),
                       child: McqQuestion(
-                        question: response.questions![_currentQuestion],
+                        question: response.quizResults?[_currentQuestion] ?? QuizResults(),
+                        onTap: (String selectedAns) {
+                          response.addSelectedAnswer(index: _currentQuestion, selectedAns: selectedAns);
+                        },
                       ),
                       //child: TrueFalseQuestion(),
                     ),
@@ -275,8 +247,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     ///NEXT BUTTON
                     GestureDetector(
                       onTap: () {
-                        if (_currentQuestion + 1 ==
-                            response.questions!.length) {
+                        if (_currentQuestion + 1 == response.quizResults?.length) {
                           Navigator.pushNamed(context, Routes.quizEndScreen);
                         } else {
                           _currentQuestion++;
@@ -284,19 +255,13 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         }
                       },
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 10),
-                        decoration: BoxDecoration(
-                            color: AppColors.blueFont,
-                            borderRadius: BorderRadius.circular(
-                                RadiusConstants.commonRadius)),
+                        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                        decoration:
+                            BoxDecoration(color: AppColors.blueFont, borderRadius: BorderRadius.circular(RadiusConstants.commonRadius)),
                         child: const Center(
                           child: Text(
                             Strings.next,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700),
+                            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700),
                           ),
                         ),
                       ),
