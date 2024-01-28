@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:komodotrivia/providers/question_provider.dart';
 import 'package:komodotrivia/ui/commons/mcq_question.dart';
+import '../../providers/score_provider.dart';
 import '../../utils/constants/layout_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -275,6 +276,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     ///NEXT BUTTON
                     GestureDetector(
                       onTap: () {
+                        Provider.of<ScoreProvider>(context, listen: false)
+                            .revealAnswers = false;
                         if (_currentQuestion + 1 ==
                             response.questions!.length) {
                           Navigator.pushNamed(context, Routes.quizEndScreen);

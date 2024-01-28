@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:komodotrivia/providers/score_provider.dart';
-import 'package:provider/provider.dart';
 import '../../ui/commons/question_card.dart';
 
 import '../../models/question_model.dart';
-import '../../utils/constants/colors_constants.dart';
-import '../../utils/constants/layout_constants.dart';
 import 'option_card.dart';
 
 class McqQuestion extends StatefulWidget {
@@ -42,7 +38,7 @@ class _McqQuestionState extends State<McqQuestion> {
   @override
   void initState() {
     addOptions();
-    Provider.of<ScoreProvider>(context, listen: false).revealAnswers = false;
+
     super.initState();
   }
 

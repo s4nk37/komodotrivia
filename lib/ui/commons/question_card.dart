@@ -18,7 +18,7 @@ class _QuestionCardState extends State<QuestionCard> {
   Timer? _timer;
   int _remainingSeconds;
 
-  _QuestionCardState({int startSeconds = 10})
+  _QuestionCardState({int startSeconds = 30})
       : _remainingSeconds = startSeconds;
 
   void _startCountdown() {

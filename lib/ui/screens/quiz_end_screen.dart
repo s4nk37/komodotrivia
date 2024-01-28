@@ -5,6 +5,7 @@ import '../../providers/score_provider.dart';
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/strings_constants.dart';
 import '../../utils/constants/textstyle_constants.dart';
+import '../../utils/routes.dart';
 
 class QuizEndScreen extends StatefulWidget {
   const QuizEndScreen({super.key});
@@ -18,73 +19,87 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
   Widget build(BuildContext context) {
     var scoreprovider = Provider.of<ScoreProvider>(context);
 
-    return Scaffold(
-      backgroundColor: AppColors.bgWhite,
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: GestureDetector(
-          child: const Icon(Icons.arrow_back_ios, color: AppColors.fontWhite),
-          onTap: () {
-            Navigator.pop(context);
-          },
+    return PopScope(
+      canPop: false, // Control whether the back button can pop the route
+      onPopInvoked: (didPop) {
+        // // Handle back button press logic here, regardless of whether the pop occurred
+        // if (!didPop) {
+        //   // Perform actions if the route was popped
+        //   Navigator.pushNamed(context, Routes.homeScreen);
+        // } else {
+        //   // Perform actions if the route was not popped
+        //   Navigator.pushNamed(context, Routes.homeScreen);
+        // }
+        Navigator.pushNamed(context, Routes.homeScreen);
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.bgWhite,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: GestureDetector(
+            child: const Icon(Icons.arrow_back_ios, color: AppColors.fontWhite),
+            onTap: () {
+              Navigator.pushNamed(context, Routes.homeScreen);
+            },
+          ),
         ),
-      ),
-      body: Column(
-        children: [
-          CustomPaint(
-            painter: HeaderCurvedContainer(),
-            child: SizedBox(
-              height: 400,
-              width: double.infinity,
+        body: Column(
+          children: [
+            CustomPaint(
+              painter: HeaderCurvedContainer(),
+              child: SizedBox(
+                height: 400,
+                width: double.infinity,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        Strings.congratulations,
+                        style: TextStyle(
+                            color: AppColors.fontWhite,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 30),
+                      ),
+                      GestureDetector(
+                        child: Text(
+                          Strings.playAgain,
+                          style: TextStyle(
+                              color: AppColors.fontBlack.withOpacity(0.5),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
               child: Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Text(
-                      Strings.congratulations,
-                      style: TextStyle(
-                          color: AppColors.fontWhite,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 30),
+                    Text(
+                      "Score: ${scoreprovider.correctAnswers}/${scoreprovider.totalQuestions}",
+                      style: largeTitle.copyWith(color: AppColors.orange),
                     ),
-                    GestureDetector(
-                      child: Text(
-                        Strings.playAgain,
-                        style: TextStyle(
-                            color: AppColors.fontBlack.withOpacity(0.5),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20),
+                    const CircleAvatar(
+                      radius: 100,
+                      backgroundColor: AppColors.blueBg,
+                      child: Icon(
+                        Icons.check,
+                        color: AppColors.blueFont,
+                        size: 100,
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-          ),
-          Expanded(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    "Score: ${scoreprovider.correctAnswers}/${scoreprovider.totalQuestions}",
-                    style: largeTitle.copyWith(color: AppColors.orange),
-                  ),
-                  const CircleAvatar(
-                    radius: 100,
-                    backgroundColor: AppColors.blueBg,
-                    child: Icon(
-                      Icons.check,
-                      color: AppColors.blueFont,
-                      size: 100,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
