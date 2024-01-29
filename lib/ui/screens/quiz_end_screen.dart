@@ -5,7 +5,6 @@ import '../../providers/score_provider.dart';
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/strings_constants.dart';
 import '../../utils/constants/textstyle_constants.dart';
-import '../../utils/routes.dart';
 
 class QuizEndScreen extends StatefulWidget {
   const QuizEndScreen({super.key});
@@ -17,13 +16,13 @@ class QuizEndScreen extends StatefulWidget {
 class _QuizEndScreenState extends State<QuizEndScreen> {
   @override
   Widget build(BuildContext context) {
-    var scoreprovider = Provider.of<ScoreProvider>(context);
+    var scoreProvider = Provider.of<ScoreProvider>(context);
 
-    return PopScope(
-      canPop: false, // Control whether the back button can pop the route
-      onPopInvoked: (didPop) {
-        scoreprovider.updatePoints();
-        Navigator.pushNamed(context, Routes.homeScreen);
+    return WillPopScope(
+      onWillPop: () async {
+        scoreProvider.updatePoints();
+        Navigator.popUntil(context, (route) => route.isFirst);
+        return true;
       },
       child: Scaffold(
         backgroundColor: AppColors.bgWhite,
@@ -33,8 +32,8 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
           leading: GestureDetector(
             child: const Icon(Icons.arrow_back_ios, color: AppColors.fontWhite),
             onTap: () {
-              scoreprovider.updatePoints();
-              Navigator.pushNamed(context, Routes.homeScreen);
+              scoreProvider.updatePoints();
+              Navigator.popUntil(context, (route) => route.isFirst);
             },
           ),
         ),
@@ -76,7 +75,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      "Score: ${scoreprovider.correctAnswers}/${scoreprovider.totalQuestions}",
+                      "Score: ${scoreProvider.correctAnswers}/${scoreProvider.totalQuestions}",
                       style: largeTitle.copyWith(color: AppColors.orange),
                     ),
                     const CircleAvatar(

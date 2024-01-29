@@ -26,16 +26,24 @@ class _McqQuestionState extends State<McqQuestion> {
         ),
       );
     }
-    options.add(OptionCard(
-      model: OptionModel(
-        title: widget.question.correctAnswer!,
-        isFalse: false,
-      ),
-    ));
+
     if (widget.question.type == 'multiple') {
+      options.add(OptionCard(
+        model: OptionModel(
+          title: widget.question.correctAnswer!,
+          isFalse: false,
+        ),
+      ));
       options.shuffle();
     } else {
-      options.reversed;
+      options.insert(
+          widget.question.correctAnswer! == "True" ? 0 : 1,
+          OptionCard(
+            model: OptionModel(
+              title: widget.question.correctAnswer!,
+              isFalse: false,
+            ),
+          ));
     }
   }
 
