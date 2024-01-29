@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:komodotrivia/providers/question_provider.dart';
 import 'package:provider/provider.dart';
-import './utils/routes.dart';
 
-import 'providers/score_provider.dart';
-import 'ui/screens/home_screen.dart';
+import '/providers/score_provider.dart';
+import '/ui/screens/home_screen.dart';
+import '/providers/question_provider.dart';
+import '/utils/constants/strings_constants.dart';
+import '/utils/routes.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Komodo Trivia',
+        title: Strings.appTitle,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,

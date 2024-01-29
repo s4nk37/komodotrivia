@@ -28,8 +28,9 @@ class QuizCategoryCard extends StatelessWidget {
         Provider.of<QuestionProvider>(context, listen: false)
             .fetchAndSetQuestions(
                 categoryId: id, numberOfQuestions: numberOfQuestions);
-        scoreProvider.totalQuestions = numberOfQuestions;
         scoreProvider.reset();
+        scoreProvider.totalQuestions = numberOfQuestions;
+        scoreProvider.currentCategory = id;
         Navigator.pushNamed(context, Routes.questionScreen);
       },
       child: Container(

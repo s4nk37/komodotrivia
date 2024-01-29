@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:komodotrivia/providers/question_provider.dart';
-import 'package:komodotrivia/ui/commons/mcq_question.dart';
-import '../../providers/score_provider.dart';
-import '../../utils/constants/layout_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '/providers/question_provider.dart';
+import '/ui/commons/mcq_question.dart';
+import '../../providers/score_provider.dart';
+import '../../utils/constants/layout_constants.dart';
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/strings_constants.dart';
 import '../../utils/routes.dart';
@@ -24,6 +24,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   Widget build(BuildContext context) {
     final response = Provider.of<QuestionProvider>(context);
     return Scaffold(
+      backgroundColor: AppColors.bgWhite,
       body: SafeArea(
         child: response.isLoading
             ? Shimmer.fromColors(
@@ -278,6 +279,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       onTap: () {
                         Provider.of<ScoreProvider>(context, listen: false)
                             .revealAnswers = false;
+
                         if (_currentQuestion + 1 ==
                             response.questions!.length) {
                           Navigator.pushNamed(context, Routes.quizEndScreen);

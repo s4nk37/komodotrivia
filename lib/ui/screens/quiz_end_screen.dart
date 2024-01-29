@@ -22,14 +22,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
     return PopScope(
       canPop: false, // Control whether the back button can pop the route
       onPopInvoked: (didPop) {
-        // // Handle back button press logic here, regardless of whether the pop occurred
-        // if (!didPop) {
-        //   // Perform actions if the route was popped
-        //   Navigator.pushNamed(context, Routes.homeScreen);
-        // } else {
-        //   // Perform actions if the route was not popped
-        //   Navigator.pushNamed(context, Routes.homeScreen);
-        // }
+        scoreprovider.updatePoints();
         Navigator.pushNamed(context, Routes.homeScreen);
       },
       child: Scaffold(
@@ -40,6 +33,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
           leading: GestureDetector(
             child: const Icon(Icons.arrow_back_ios, color: AppColors.fontWhite),
             onTap: () {
+              scoreprovider.updatePoints();
               Navigator.pushNamed(context, Routes.homeScreen);
             },
           ),

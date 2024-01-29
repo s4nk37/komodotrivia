@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:komodotrivia/providers/score_provider.dart';
+import 'package:provider/provider.dart';
 
 import '/ui/commons/quiz_category_card.dart';
 import '../../utils/constants/layout_constants.dart';
@@ -44,8 +46,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const CircleAvatar(
                     radius: 20,
-                    backgroundImage: NetworkImage(
-                        'https://avatars.githubusercontent.com/u/55942632?v=4'),
+                    backgroundColor: Colors.black12,
+                    child: FlutterLogo(
+                      style: FlutterLogoStyle.markOnly,
+                    ),
                   ),
                 ],
               ),
@@ -71,18 +75,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(children: [
                       Image.asset(Assets.imagesTrophy),
                       const SizedBox(width: 10),
-                      const Column(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             Strings.ranking,
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.fontBlack),
                           ),
                           Text(
-                            "A++",
-                            style: TextStyle(color: AppColors.blueFont),
+                            context.watch<ScoreProvider>().ranking,
+                            style: const TextStyle(color: AppColors.blueFont),
                           ),
                         ],
                       )
@@ -95,18 +99,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     Row(children: [
                       Image.asset(Assets.imagesCoin),
                       const SizedBox(width: 10),
-                      const Column(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             Strings.points,
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.fontBlack),
                           ),
                           Text(
-                            "100",
-                            style: TextStyle(color: AppColors.blueFont),
+                            context.watch<ScoreProvider>().points.toString(),
+                            style: const TextStyle(color: AppColors.blueFont),
                           ),
                         ],
                       )

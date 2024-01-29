@@ -1,4 +1,5 @@
 class Strings {
+  static const appTitle = "Komodo Trivia";
   static const String hi = "Hi,";
   static const String letsmakethisdayproductive =
       "Let's make this day productive!";
@@ -16,5 +17,6 @@ class Strings {
   static const String trueString = "True";
   static const String falseString = "False";
   static const String congratulations = "Congratulations!";
+  static const String betterLuckNextTime = "Better luck next time!";
   static const String playAgain = "Tap here to Play Again";
 }

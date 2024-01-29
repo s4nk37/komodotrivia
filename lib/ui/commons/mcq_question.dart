@@ -32,7 +32,11 @@ class _McqQuestionState extends State<McqQuestion> {
         isFalse: false,
       ),
     ));
-    options.shuffle();
+    if (widget.question.type == 'multiple') {
+      options.shuffle();
+    } else {
+      options.reversed;
+    }
   }
 
   @override
