@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
-import '../models/question_model.dart';
-import '../utils/constants/api_constants.dart';
+import '../../models/question_model.dart';
+import '../../utils/configs/app_config.dart';
 
 class QuestionProvider with ChangeNotifier {
   List<Results>? _questions;

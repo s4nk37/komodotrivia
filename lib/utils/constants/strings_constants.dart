@@ -1,6 +1,4 @@
 class Strings {
-  static const String kAppTitle = "Komodo Trivia";
-  static const String kAppFont = "Roboto";
   static const String kHi = "Hi,";
   static const String kLetsmakethisdayproductive =
       "Let's make this day productive!";

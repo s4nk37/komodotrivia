@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:komodotrivia/providers/score_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../services/providers/score_provider.dart';
 import '../../utils/constants/colors_constants.dart';
 
 class QuestionCard extends StatefulWidget {

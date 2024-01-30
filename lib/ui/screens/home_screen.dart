@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:komodotrivia/providers/score_provider.dart';
 import 'package:provider/provider.dart';
 
-import '/ui/commons/quiz_category_card.dart';
+import '../../services/providers/score_provider.dart';
 import '../../utils/constants/layout_constants.dart';
 import '../../utils/constants/textstyle_constants.dart';
 import '../../generated/assets.dart';
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/strings_constants.dart';
+import '../commons/quiz_category_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

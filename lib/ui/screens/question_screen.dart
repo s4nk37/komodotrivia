@@ -3,13 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '/providers/question_provider.dart';
-import '/ui/commons/mcq_question.dart';
-import '../../providers/score_provider.dart';
+import '../../services/providers/question_provider.dart';
+import '../../services/providers/score_provider.dart';
 import '../../utils/constants/layout_constants.dart';
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/strings_constants.dart';
 import '../../utils/routes.dart';
+import '../commons/mcq_question.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});

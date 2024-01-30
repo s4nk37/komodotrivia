@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/score_provider.dart';
+import '../../services/providers/score_provider.dart';
 import '../../utils/constants/colors_constants.dart';
 import '../../utils/constants/strings_constants.dart';
 import '../../utils/constants/textstyle_constants.dart';

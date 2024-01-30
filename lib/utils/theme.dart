@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'constants/strings_constants.dart';
+import 'configs/app_config.dart';
 
 final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primarySwatch: Colors.blue,
-  fontFamily: Strings.kAppFont,
+  fontFamily: kAppFont,
   // ...other theme customizations
 );
 
