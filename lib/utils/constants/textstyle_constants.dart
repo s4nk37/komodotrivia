@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 
 import 'colors_constants.dart';
 
-TextStyle largeTitle = const TextStyle(
-    fontSize: 28, fontWeight: FontWeight.w700, color: AppColors.fontBlack);
+TextStyle kLargeTitle = const TextStyle(
+    fontSize: 28, fontWeight: FontWeight.w700, color: AppColors.kFontBlack);
 
-TextStyle subTitle = const TextStyle(
-    fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.fontGrey);
+TextStyle kSubTitle = const TextStyle(
+    fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.kFontGrey);
 
-TextStyle appBarText = const TextStyle(
+TextStyle kAppBarText = const TextStyle(
     color: Colors.black,
     fontSize: 16,
     fontWeight: FontWeight.w600,
     letterSpacing: 0.2);
 
-TextStyle mediumText = const TextStyle(
+TextStyle kMediumText = const TextStyle(
     fontSize: 16, fontWeight: FontWeight.w500, color: Colors.black87);
 
-TextStyle smallText = const TextStyle(
+TextStyle kSmallText = const TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.w500,
     fontFamily: "Poppins",

@@ -58,6 +58,7 @@ class _McqQuestionState extends State<McqQuestion> {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.only(top: 20),
+      shrinkWrap: true,
       children: [
         ///QUESTION CARD
         QuestionCard(

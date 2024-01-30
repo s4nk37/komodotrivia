@@ -2,13 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:html_unescape/html_unescape.dart';
 
 class APIConstants {
-  static const String baseUrl = "https://opentdb.com";
-  static const String categoryUrl = "https://opentdb.com/api_category.php";
+  static const String kBaseUrl = "https://opentdb.com";
+  static const String kCategoryUrl = "https://opentdb.com/api_category.php";
 }
 
 final dio = Dio(
   BaseOptions(
-    baseUrl: APIConstants.baseUrl,
+    baseUrl: APIConstants.kBaseUrl,
     connectTimeout: const Duration(seconds: 20),
     receiveTimeout: const Duration(seconds: 20),
     headers: {

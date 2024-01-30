@@ -44,7 +44,7 @@ class QuizCategoryCard extends StatelessWidget {
               offset: const Offset(4, 4),
             ),
           ],
-          borderRadius: BorderRadius.circular(RadiusConstants.cardRadius),
+          borderRadius: BorderRadius.circular(RadiusConstants.kCardRadius),
         ),
         padding: const EdgeInsets.only(left: 15),
         child: Column(
@@ -65,12 +65,12 @@ class QuizCategoryCard extends StatelessWidget {
               style: const TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 16,
-                  color: AppColors.fontBlack),
+                  color: AppColors.kFontBlack),
             ),
             Text(
               "$numberOfQuestions questions",
               style: const TextStyle(
-                color: AppColors.greyBg,
+                color: AppColors.kGreyBg,
                 fontSize: 12,
               ),
             ),

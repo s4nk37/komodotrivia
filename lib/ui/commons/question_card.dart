@@ -46,6 +46,7 @@ class _QuestionCardState extends State<QuestionCard> {
   @override
   void dispose() {
     _timer?.cancel();
+    print("DISPOSED");
     super.dispose();
   }
 
@@ -55,7 +56,7 @@ class _QuestionCardState extends State<QuestionCard> {
       height: 200,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.blueBg,
+        color: AppColors.kBlueBg,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -68,7 +69,7 @@ class _QuestionCardState extends State<QuestionCard> {
                 Container(
                   height: 67,
                   decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: AppColors.bgWhite),
+                      shape: BoxShape.circle, color: AppColors.kBgWhite),
                 ),
                 SizedBox(
                   height: 53,
@@ -76,15 +77,15 @@ class _QuestionCardState extends State<QuestionCard> {
                   child: CircularProgressIndicator(
                     value: _remainingSeconds / 30,
                     strokeWidth: 6,
-                    color: AppColors.blueFont,
-                    backgroundColor: AppColors.borderGrey,
+                    color: AppColors.kBlueFont,
+                    backgroundColor: AppColors.kBorderGrey,
                     strokeCap: StrokeCap.round,
                   ),
                 ),
                 Text(
                   "$_remainingSeconds",
                   style:
-                      const TextStyle(color: AppColors.fontGrey, fontSize: 16),
+                      const TextStyle(color: AppColors.kFontGrey, fontSize: 16),
                 )
               ],
             ),
@@ -97,13 +98,12 @@ class _QuestionCardState extends State<QuestionCard> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Text(
-              // "What is the most popular sports in history?",
               widget.questionText,
               textAlign: TextAlign.center,
               style: const TextStyle(
                   overflow: TextOverflow.clip,
                   fontSize: 18,
-                  color: AppColors.fontBlack,
+                  color: AppColors.kFontBlack,
                   fontWeight: FontWeight.w700),
             ),
           )

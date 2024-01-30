@@ -21,10 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.bgWhite,
+        backgroundColor: AppColors.kBgWhite,
         body: Padding(
           padding:
-              PaddingConstants.scaffoldPadding.copyWith(top: 24, bottom: 0),
+              PaddingConstants.kScaffoldPadding.copyWith(top: 24, bottom: 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -35,12 +35,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${Strings.hi} Komodo!',
-                        style: largeTitle,
+                        '${Strings.kHi} Komodo!',
+                        style: kLargeTitle,
                       ),
                       Text(
-                        Strings.letsmakethisdayproductive,
-                        style: subTitle,
+                        Strings.kLetsmakethisdayproductive,
+                        style: kSubTitle,
                       ),
                     ],
                   ),
@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                   borderRadius:
-                      BorderRadius.circular(RadiusConstants.commonRadius),
+                      BorderRadius.circular(RadiusConstants.kCommonRadius),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -79,14 +79,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            Strings.ranking,
+                            Strings.kRanking,
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                color: AppColors.fontBlack),
+                                color: AppColors.kFontBlack),
                           ),
                           Text(
                             context.watch<ScoreProvider>().ranking,
-                            style: const TextStyle(color: AppColors.blueFont),
+                            style: const TextStyle(color: AppColors.kBlueFont),
                           ),
                         ],
                       )
@@ -103,14 +103,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            Strings.points,
+                            Strings.kPoints,
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
-                                color: AppColors.fontBlack),
+                                color: AppColors.kFontBlack),
                           ),
                           Text(
                             context.watch<ScoreProvider>().points.toString(),
-                            style: const TextStyle(color: AppColors.blueFont),
+                            style: const TextStyle(color: AppColors.kBlueFont),
                           ),
                         ],
                       )
@@ -120,11 +120,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 24),
               const Text(
-                Strings.letsplay,
+                Strings.kLetsplay,
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.fontBlack),
+                    color: AppColors.kFontBlack),
               ),
               const SizedBox(height: 24),
               Expanded(
@@ -135,27 +135,27 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisSpacing: 29,
                   children: const [
                     QuizCategoryCard(
-                        title: Strings.sports,
+                        title: Strings.kSports,
                         id: 21,
                         imagePath: Assets.imagesBasketball,
                         numberOfQuestions: 50),
                     QuizCategoryCard(
-                        title: Strings.math,
+                        title: Strings.kMath,
                         id: 19,
                         imagePath: Assets.imagesCalculator,
                         numberOfQuestions: 20),
                     QuizCategoryCard(
-                        title: Strings.history,
+                        title: Strings.kHistory,
                         id: 23,
                         imagePath: Assets.imagesCalendar,
                         numberOfQuestions: 10),
                     QuizCategoryCard(
-                        title: Strings.geography,
+                        title: Strings.kGeography,
                         id: 22,
                         imagePath: Assets.imagesMap,
                         numberOfQuestions: 20),
                     QuizCategoryCard(
-                        title: Strings.science,
+                        title: Strings.kScience,
                         id: 17,
                         imagePath: Assets.imagesChemistry,
                         numberOfQuestions: 30),

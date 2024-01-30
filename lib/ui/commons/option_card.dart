@@ -40,14 +40,16 @@ class _OptionCardState extends State<OptionCard> {
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
           color: revealAnswer
-              ? (widget.model.isFalse ? Colors.transparent : AppColors.blueBg)
+              ? (widget.model.isFalse ? Colors.transparent : AppColors.kBlueBg)
               : Colors.transparent,
-          borderRadius: BorderRadius.circular(RadiusConstants.commonRadius),
+          borderRadius: BorderRadius.circular(RadiusConstants.kCommonRadius),
           border: Border.all(
               width: 2,
               color: revealAnswer
-                  ? (widget.model.isFalse ? AppColors.red : AppColors.blueFont)
-                  : AppColors.borderGrey),
+                  ? (widget.model.isFalse
+                      ? AppColors.kRed
+                      : AppColors.kBlueFont)
+                  : AppColors.kBorderGrey),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,7 +60,7 @@ class _OptionCardState extends State<OptionCard> {
                 overflow: TextOverflow.clip,
                 style: const TextStyle(
                     fontSize: 18,
-                    color: AppColors.fontGrey,
+                    color: AppColors.kFontGrey,
                     fontWeight: FontWeight.w500),
               ),
             ),
@@ -69,19 +71,19 @@ class _OptionCardState extends State<OptionCard> {
                     if (widget.model.isFalse)
                       const Icon(
                         Icons.cancel,
-                        color: AppColors.red,
+                        color: AppColors.kRed,
                       ),
                     if (!widget.model.isFalse)
                       const Icon(
                         Icons.check_circle,
-                        color: AppColors.blueFont,
+                        color: AppColors.kBlueFont,
                       ),
                   ],
                 )),
             if (!revealAnswer)
               const Icon(
                 Icons.circle_outlined,
-                color: AppColors.borderGrey,
+                color: AppColors.kBorderGrey,
               ),
           ],
         ),

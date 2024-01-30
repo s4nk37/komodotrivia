@@ -6,6 +6,7 @@ import '/ui/screens/home_screen.dart';
 import '/providers/question_provider.dart';
 import '/utils/constants/strings_constants.dart';
 import '/utils/routes.dart';
+import 'utils/theme.dart';
 
 void main() => runApp(const MyApp());
 
@@ -22,14 +23,15 @@ class MyApp extends StatelessWidget {
         ListenableProvider<ScoreProvider>(
           create: (_) => ScoreProvider(),
         ),
+        ListenableProvider(
+          create: (_) => ThemeProvider(),
+        )
       ],
       child: MaterialApp(
-        title: Strings.appTitle,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-          fontFamily: "Roboto",
-        ),
+        title: Strings.kAppTitle,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.dark,
         routes: Routes.routes,
         initialRoute: Routes.homeScreen,
         debugShowCheckedModeBanner: false,
