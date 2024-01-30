@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:komodotrivia/utils/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../services/providers/question_provider.dart';
-import '../../services/providers/score_provider.dart';
-import '../../utils/constants/layout_constants.dart';
-import '../../utils/constants/colors_constants.dart';
-import '../../utils/constants/strings_constants.dart';
-import '../../utils/routes.dart';
-import '../commons/mcq_question.dart';
+import '../../../providers/question_provider.dart';
+import '../../../providers/score_provider.dart';
+import '../../../utils/constants/layout_constants.dart';
+import '../../../utils/constants/colors_constants.dart';
+import '../../../utils/constants/strings_constants.dart';
+import '../../../utils/routes.dart';
+import 'mcq_question.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
@@ -43,24 +44,29 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
   @override
   void initState() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    SystemChrome.setSystemUIOverlayStyle(
+        context.read<ThemeProvider>().isDarkTheme
+            ? SystemUiOverlayStyle.dark
+            : SystemUiOverlayStyle.light);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final response = Provider.of<QuestionProvider>(context);
+    final theme = Theme.of(context).colorScheme;
     return WillPopScope(
       onWillPop: () async {
         return confirmDialog();
       },
       child: Scaffold(
-        backgroundColor: AppColors.kBgWhite,
         body: SafeArea(
           child: response.isLoading
               ? Shimmer.fromColors(
-                  baseColor: AppColors.kBorderGrey,
-                  highlightColor: AppColors.kBlueBg,
+                  baseColor: context.read<ThemeProvider>().isDarkTheme
+                      ? AppColors.kGreyBg
+                      : AppColors.kBorderGrey,
+                  highlightColor: theme.primaryContainer,
                   child: Padding(
                     padding: PaddingConstants.kScaffoldPadding
                         .copyWith(top: 24, bottom: 24),
@@ -80,9 +86,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                 border:
                                     Border.all(color: AppColors.kBorderGrey),
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.close,
-                                color: AppColors.kGreyBg,
+                                color: theme.onSurface,
                                 size: 26,
                               ),
                             ),
@@ -100,23 +106,23 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                   borderRadius: BorderRadius.circular(
                                       RadiusConstants.kBarRadius),
                                 ),
-                                child: const Row(
+                                child: Row(
                                   children: [
                                     Expanded(
                                       child: LinearProgressIndicator(
                                         value: 1,
                                         minHeight: 10,
                                         color: AppColors.kOrange,
-                                        backgroundColor: AppColors.kBorderGrey,
-                                        borderRadius: BorderRadius.all(
+                                        backgroundColor: theme.onSurface,
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(
                                                 RadiusConstants.kBarRadius)),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
-                                    Text(
+                                    const Text(
                                       "",
                                       style: TextStyle(
                                           color: AppColors.kBlueFont,
@@ -137,7 +143,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                           height: 200,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: AppColors.kBlueBg,
+                            color: theme.primaryContainer,
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
@@ -151,7 +157,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                           width: double.infinity,
                           margin: const EdgeInsets.only(bottom: 12),
                           decoration: BoxDecoration(
-                            color: AppColors.kBlueBg,
+                            color: theme.primaryContainer,
                             borderRadius: BorderRadius.circular(
                                 RadiusConstants.kCommonRadius),
                             border: Border.all(
@@ -165,7 +171,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                           width: double.infinity,
                           margin: const EdgeInsets.only(bottom: 12),
                           decoration: BoxDecoration(
-                            color: AppColors.kBlueBg,
+                            color: theme.primaryContainer,
                             borderRadius: BorderRadius.circular(
                                 RadiusConstants.kCommonRadius),
                             border: Border.all(
@@ -179,7 +185,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                           width: double.infinity,
                           margin: const EdgeInsets.only(bottom: 12),
                           decoration: BoxDecoration(
-                            color: AppColors.kBlueBg,
+                            color: theme.primaryContainer,
                             borderRadius: BorderRadius.circular(
                                 RadiusConstants.kCommonRadius),
                             border: Border.all(
@@ -193,7 +199,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                           width: double.infinity,
                           margin: const EdgeInsets.only(bottom: 12),
                           decoration: BoxDecoration(
-                            color: AppColors.kBlueBg,
+                            color: theme.primaryContainer,
                             borderRadius: BorderRadius.circular(
                                 RadiusConstants.kCommonRadius),
                             border: Border.all(
@@ -207,7 +213,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 15, horizontal: 10),
                           decoration: BoxDecoration(
-                              color: AppColors.kBlueFont,
+                              color: theme.primary,
                               borderRadius: BorderRadius.circular(
                                   RadiusConstants.kCommonRadius)),
                           child: const Center(
@@ -244,9 +250,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
                                 border:
                                     Border.all(color: AppColors.kBorderGrey),
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.close,
-                                color: AppColors.kGreyBg,
+                                color: theme.onSurface,
                                 size: 26,
                               ),
                             ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../services/providers/score_provider.dart';
-import '../../utils/constants/colors_constants.dart';
-import '../../utils/constants/layout_constants.dart';
+import '../../../providers/score_provider.dart';
+import '../../../utils/constants/colors_constants.dart';
+import '../../../utils/constants/layout_constants.dart';
 import 'mcq_question.dart';
 
 class OptionCard extends StatefulWidget {
@@ -22,6 +22,7 @@ class _OptionCardState extends State<OptionCard> {
   @override
   Widget build(BuildContext context) {
     bool revealAnswer = Provider.of<ScoreProvider>(context).revealAnswers;
+    final theme = Theme.of(context).colorScheme;
 
     return GestureDetector(
       onTap: () {
@@ -32,7 +33,6 @@ class _OptionCardState extends State<OptionCard> {
           }
           Provider.of<ScoreProvider>(context, listen: false).reveal();
         }
-        print("Revel: ${revealAnswer}");
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 24),
@@ -40,7 +40,9 @@ class _OptionCardState extends State<OptionCard> {
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
           color: revealAnswer
-              ? (widget.model.isFalse ? Colors.transparent : AppColors.kBlueBg)
+              ? (widget.model.isFalse
+                  ? Colors.transparent
+                  : theme.primaryContainer)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(RadiusConstants.kCommonRadius),
           border: Border.all(
@@ -58,9 +60,13 @@ class _OptionCardState extends State<OptionCard> {
               child: Text(
                 widget.model.title,
                 overflow: TextOverflow.clip,
-                style: const TextStyle(
+                style: TextStyle(
                     fontSize: 18,
-                    color: AppColors.kFontGrey,
+                    color: revealAnswer
+                        ? (widget.model.isFalse
+                            ? AppColors.kRed
+                            : AppColors.kBlueFont)
+                        : AppColors.kFontGrey,
                     fontWeight: FontWeight.w500),
               ),
             ),

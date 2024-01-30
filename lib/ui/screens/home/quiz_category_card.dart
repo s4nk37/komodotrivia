@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../services/providers/question_provider.dart';
-import '../../services/providers/score_provider.dart';
-import '../../utils/constants/colors_constants.dart';
-import '../../utils/constants/layout_constants.dart';
-import '../../utils/routes.dart';
-import '../../utils/styles/simple_shadow.dart';
+import '../../../providers/question_provider.dart';
+import '../../../providers/score_provider.dart';
+import '../../../utils/constants/layout_constants.dart';
+import '../../../utils/routes.dart';
+import '../../../utils/styles/simple_shadow.dart';
 
 class QuizCategoryCard extends StatelessWidget {
   final String imagePath;
@@ -23,6 +22,7 @@ class QuizCategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var scoreProvider = Provider.of<ScoreProvider>(context, listen: false);
+    final theme = Theme.of(context).colorScheme;
     return GestureDetector(
       onTap: () {
         Provider.of<QuestionProvider>(context, listen: false)
@@ -35,7 +35,7 @@ class QuizCategoryCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: theme.surface,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.08),
@@ -62,15 +62,15 @@ class QuizCategoryCard extends StatelessWidget {
             ),
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 16,
-                  color: AppColors.kFontBlack),
+                  color: theme.onBackground),
             ),
             Text(
               "$numberOfQuestions questions",
-              style: const TextStyle(
-                color: AppColors.kGreyBg,
+              style: TextStyle(
+                color: theme.onSurface,
                 fontSize: 12,
               ),
             ),

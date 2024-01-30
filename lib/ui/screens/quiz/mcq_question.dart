@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../ui/commons/question_card.dart';
 
-import '../../models/question_model.dart';
+import '../../../models/question_model.dart';
 import 'option_card.dart';
+import 'question_card.dart';
 
 class McqQuestion extends StatefulWidget {
   final Results question;
@@ -57,7 +57,7 @@ class _McqQuestionState extends State<McqQuestion> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 35),
       shrinkWrap: true,
       children: [
         ///QUESTION CARD

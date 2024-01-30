@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../ui/screens/home_screen.dart';
-import '../ui/screens/question_screen.dart';
-import '../ui/screens/quiz_end_screen.dart';
+import '../ui/screens/home/home_screen.dart';
+import '../ui/screens/quiz/question_screen.dart';
+import '../ui/screens/quiz/quiz_end_screen.dart';
 
 class Routes {
+  Routes._(); // this basically makes it so you can't instantiate this class
+
   static const String splashScreen = '/';
   static const String homeScreen = '/home_screen';
   static const String questionScreen = '/question_screen';

@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../services/providers/score_provider.dart';
-import '../../utils/constants/colors_constants.dart';
+import '../../../providers/score_provider.dart';
+import '../../../utils/constants/colors_constants.dart';
 
 class QuestionCard extends StatefulWidget {
   final String questionText;
@@ -52,11 +52,12 @@ class _QuestionCardState extends State<QuestionCard> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
     return Container(
-      height: 200,
+      height: 220,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.kBlueBg,
+        color: theme.primaryContainer,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -68,8 +69,8 @@ class _QuestionCardState extends State<QuestionCard> {
               children: [
                 Container(
                   height: 67,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: AppColors.kBgWhite),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: theme.background),
                 ),
                 SizedBox(
                   height: 53,
@@ -90,21 +91,20 @@ class _QuestionCardState extends State<QuestionCard> {
               ],
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
 
           ///QUESTION TEXT
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Text(
-              widget.questionText,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  overflow: TextOverflow.clip,
-                  fontSize: 18,
-                  color: AppColors.kFontBlack,
-                  fontWeight: FontWeight.w700),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 7),
+              child: Text(
+                widget.questionText,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    overflow: TextOverflow.clip,
+                    fontSize: 18,
+                    color: theme.onBackground,
+                    fontWeight: FontWeight.w700),
+              ),
             ),
           )
         ],

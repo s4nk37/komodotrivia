@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:html_unescape/html_unescape.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/api_constants.dart';
 
@@ -18,3 +19,6 @@ final dio = Dio(
 );
 
 var unescape = HtmlUnescape();
+
+// Obtain shared preferences.
+late final SharedPreferences prefs;
