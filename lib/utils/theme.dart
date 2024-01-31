@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'configs/app_config.dart';
 import 'constants/colors_constants.dart';
@@ -57,15 +58,15 @@ final ThemeData darkTheme = ThemeData(
     iconTheme: IconThemeData(color: AppColors.kFontWhite),
   ),
   dialogTheme: const DialogTheme(
-    backgroundColor: AppColors.kBgWhite,
+    backgroundColor: AppColors.kBgBlack,
     elevation: 0,
     titleTextStyle: TextStyle(
-      color: AppColors.kFontBlack,
+      color: AppColors.kFontWhite,
       fontSize: 20,
       fontWeight: FontWeight.w700,
     ),
     contentTextStyle: TextStyle(
-      color: AppColors.kFontBlack,
+      color: AppColors.kFontWhite,
       fontSize: 16,
       fontWeight: FontWeight.w400,
     ),
@@ -108,6 +109,15 @@ class ThemeProvider extends ChangeNotifier {
 
   void toggleTheme() {
     _isDarkTheme = !_isDarkTheme;
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.light.copyWith(
+        statusBarBrightness: _isDarkTheme ? Brightness.light : Brightness.dark,
+        statusBarIconBrightness:
+            _isDarkTheme ? Brightness.light : Brightness.dark,
+        systemStatusBarContrastEnforced: true,
+        statusBarColor: _isDarkTheme ? AppColors.kBgBlack : AppColors.kBgWhite,
+      ),
+    );
     print("Theme changed to: ${_isDarkTheme ? 'Dark' : 'Light'}");
     prefs.setBool(Strings.isDarkMode, _isDarkTheme);
     notifyListeners();

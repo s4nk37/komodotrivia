@@ -43,15 +43,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
   }
 
   @override
-  void initState() {
-    SystemChrome.setSystemUIOverlayStyle(
-        context.read<ThemeProvider>().isDarkTheme
-            ? SystemUiOverlayStyle.dark
-            : SystemUiOverlayStyle.light);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final response = Provider.of<QuestionProvider>(context);
     final theme = Theme.of(context).colorScheme;
@@ -62,171 +53,174 @@ class _QuestionScreenState extends State<QuestionScreen> {
       child: Scaffold(
         body: SafeArea(
           child: response.isLoading
-              ? Shimmer.fromColors(
-                  baseColor: context.read<ThemeProvider>().isDarkTheme
-                      ? AppColors.kGreyBg
-                      : AppColors.kBorderGrey,
-                  highlightColor: theme.primaryContainer,
-                  child: Padding(
-                    padding: PaddingConstants.kScaffoldPadding
-                        .copyWith(top: 24, bottom: 24),
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 26,
-                        ),
+              ? GestureDetector(
+                  onTap: null,
+                  child: Shimmer.fromColors(
+                    baseColor: context.read<ThemeProvider>().isDarkTheme
+                        ? AppColors.kGreyBg
+                        : AppColors.kBorderGrey,
+                    highlightColor: theme.primaryContainer,
+                    child: Padding(
+                      padding: PaddingConstants.kScaffoldPadding
+                          .copyWith(top: 24, bottom: 24),
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 26,
+                          ),
 
-                        ///PROGRESS BAR
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border:
-                                    Border.all(color: AppColors.kBorderGrey),
-                              ),
-                              child: Icon(
-                                Icons.close,
-                                color: theme.onSurface,
-                                size: 26,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: Container(
-                                height: 34,
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 0, horizontal: 10),
+                          ///PROGRESS BAR
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(4),
                                 decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
                                   border:
                                       Border.all(color: AppColors.kBorderGrey),
-                                  borderRadius: BorderRadius.circular(
-                                      RadiusConstants.kBarRadius),
                                 ),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: LinearProgressIndicator(
-                                        value: 1,
-                                        minHeight: 10,
-                                        color: AppColors.kOrange,
-                                        backgroundColor: theme.onSurface,
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(
-                                                RadiusConstants.kBarRadius)),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    const Text(
-                                      "",
-                                      style: TextStyle(
-                                          color: AppColors.kBlueFont,
-                                          fontSize: 12),
-                                    )
-                                  ],
+                                child: Icon(
+                                  Icons.close,
+                                  color: theme.onSurface,
+                                  size: 26,
                                 ),
                               ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: Container(
+                                  height: 34,
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 0, horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: AppColors.kBorderGrey),
+                                    borderRadius: BorderRadius.circular(
+                                        RadiusConstants.kBarRadius),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: LinearProgressIndicator(
+                                          value: 1,
+                                          minHeight: 10,
+                                          color: AppColors.kOrange,
+                                          backgroundColor: theme.onSurface,
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(
+                                                  RadiusConstants.kBarRadius)),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      const Text(
+                                        "",
+                                        style: TextStyle(
+                                            color: AppColors.kBlueFont,
+                                            fontSize: 12),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+
+                          ///QUESTION CARD
+                          Container(
+                            height: 200,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: theme.primaryContainer,
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-
-                        ///QUESTION CARD
-                        Container(
-                          height: 200,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: theme.primaryContainer,
-                            borderRadius: BorderRadius.circular(20),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Container(
-                          height: 60,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 24),
-                          width: double.infinity,
-                          margin: const EdgeInsets.only(bottom: 12),
-                          decoration: BoxDecoration(
-                            color: theme.primaryContainer,
-                            borderRadius: BorderRadius.circular(
-                                RadiusConstants.kCommonRadius),
-                            border: Border.all(
-                                width: 2, color: AppColors.kBorderGrey),
+                          const SizedBox(
+                            height: 40,
                           ),
-                        ),
-                        Container(
-                          height: 55,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 24),
-                          width: double.infinity,
-                          margin: const EdgeInsets.only(bottom: 12),
-                          decoration: BoxDecoration(
-                            color: theme.primaryContainer,
-                            borderRadius: BorderRadius.circular(
-                                RadiusConstants.kCommonRadius),
-                            border: Border.all(
-                                width: 2, color: AppColors.kBorderGrey),
-                          ),
-                        ),
-                        Container(
-                          height: 55,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 24),
-                          width: double.infinity,
-                          margin: const EdgeInsets.only(bottom: 12),
-                          decoration: BoxDecoration(
-                            color: theme.primaryContainer,
-                            borderRadius: BorderRadius.circular(
-                                RadiusConstants.kCommonRadius),
-                            border: Border.all(
-                                width: 2, color: AppColors.kBorderGrey),
-                          ),
-                        ),
-                        Container(
-                          height: 55,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 24),
-                          width: double.infinity,
-                          margin: const EdgeInsets.only(bottom: 12),
-                          decoration: BoxDecoration(
-                            color: theme.primaryContainer,
-                            borderRadius: BorderRadius.circular(
-                                RadiusConstants.kCommonRadius),
-                            border: Border.all(
-                                width: 2, color: AppColors.kBorderGrey),
-                          ),
-                        ),
-                        const Spacer(),
-
-                        ///NEXT BUTTON
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 10),
-                          decoration: BoxDecoration(
-                              color: theme.primary,
+                          Container(
+                            height: 60,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 24),
+                            width: double.infinity,
+                            margin: const EdgeInsets.only(bottom: 12),
+                            decoration: BoxDecoration(
+                              color: theme.primaryContainer,
                               borderRadius: BorderRadius.circular(
-                                  RadiusConstants.kCommonRadius)),
-                          child: const Center(
-                            child: Text(
-                              Strings.kNext,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700),
+                                  RadiusConstants.kCommonRadius),
+                              border: Border.all(
+                                  width: 2, color: AppColors.kBorderGrey),
                             ),
                           ),
-                        )
-                      ],
+                          Container(
+                            height: 55,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 24),
+                            width: double.infinity,
+                            margin: const EdgeInsets.only(bottom: 12),
+                            decoration: BoxDecoration(
+                              color: theme.primaryContainer,
+                              borderRadius: BorderRadius.circular(
+                                  RadiusConstants.kCommonRadius),
+                              border: Border.all(
+                                  width: 2, color: AppColors.kBorderGrey),
+                            ),
+                          ),
+                          Container(
+                            height: 55,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 24),
+                            width: double.infinity,
+                            margin: const EdgeInsets.only(bottom: 12),
+                            decoration: BoxDecoration(
+                              color: theme.primaryContainer,
+                              borderRadius: BorderRadius.circular(
+                                  RadiusConstants.kCommonRadius),
+                              border: Border.all(
+                                  width: 2, color: AppColors.kBorderGrey),
+                            ),
+                          ),
+                          Container(
+                            height: 55,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 24),
+                            width: double.infinity,
+                            margin: const EdgeInsets.only(bottom: 12),
+                            decoration: BoxDecoration(
+                              color: theme.primaryContainer,
+                              borderRadius: BorderRadius.circular(
+                                  RadiusConstants.kCommonRadius),
+                              border: Border.all(
+                                  width: 2, color: AppColors.kBorderGrey),
+                            ),
+                          ),
+                          const Spacer(),
+
+                          ///NEXT BUTTON
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 10),
+                            decoration: BoxDecoration(
+                                color: theme.primary,
+                                borderRadius: BorderRadius.circular(
+                                    RadiusConstants.kCommonRadius)),
+                            child: const Center(
+                              child: Text(
+                                Strings.kNext,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 )
