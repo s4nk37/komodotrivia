@@ -20,6 +20,7 @@ class QuestionProvider with ChangeNotifier {
   Future<void> fetchAndSetQuestions(
       {required int categoryId, required int numberOfQuestions}) async {
     _isLoading = true;
+    _questions = null;
 
     try {
       print("$categoryId QUIZ API CALLED");
@@ -34,9 +35,8 @@ class QuestionProvider with ChangeNotifier {
         final loadedQuestions = QuestionResponse.fromJson(response.data);
         _questions = loadedQuestions.results;
       }
-      _isLoading = false;
-      notifyListeners();
     } on DioException catch (e) {
+      print("DIO EXCEPTION: $e");
       if (e.response != null) {
         print(e.response!.data);
         print(e.response!.headers);
@@ -49,5 +49,7 @@ class QuestionProvider with ChangeNotifier {
     } catch (error) {
       rethrow;
     }
+    _isLoading = false;
+    notifyListeners();
   }
 }
