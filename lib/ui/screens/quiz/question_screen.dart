@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -10,6 +9,7 @@ import '../../../utils/constants/colors_constants.dart';
 import '../../../utils/constants/strings_constants.dart';
 import '../../../utils/routes.dart';
 import '../../../utils/theme.dart';
+import '../../widgets/internet_error.dart';
 import 'mcq_question.dart';
 
 class QuestionScreen extends StatefulWidget {
@@ -224,129 +224,133 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     ),
                   ),
                 )
-              : Padding(
-                  padding: PaddingConstants.kScaffoldPadding
-                      .copyWith(top: 24, bottom: 24),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 26,
-                      ),
-
-                      ///PROGRESS BAR
-                      Row(
+              : response.questions == null
+                  ? const InternetError()
+                  : Padding(
+                      padding: PaddingConstants.kScaffoldPadding
+                          .copyWith(top: 24, bottom: 24),
+                      child: Column(
                         children: [
-                          GestureDetector(
-                            child: Container(
-                              padding: const EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border:
-                                    Border.all(color: AppColors.kBorderGrey),
+                          const SizedBox(
+                            height: 26,
+                          ),
+
+                          ///PROGRESS BAR
+                          Row(
+                            children: [
+                              GestureDetector(
+                                child: Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        color: AppColors.kBorderGrey),
+                                  ),
+                                  child: Icon(
+                                    Icons.close,
+                                    color: theme.onSurface,
+                                    size: 26,
+                                  ),
+                                ),
+                                onTap: () async {
+                                  await confirmDialog()
+                                      ? Navigator.pop(context)
+                                      : null;
+                                },
                               ),
-                              child: Icon(
-                                Icons.close,
-                                color: theme.onSurface,
-                                size: 26,
+                              const SizedBox(
+                                width: 10,
                               ),
-                            ),
-                            onTap: () async {
-                              await confirmDialog()
-                                  ? Navigator.pop(context)
-                                  : null;
-                            },
+                              Expanded(
+                                child: Container(
+                                  height: 34,
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 0, horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: AppColors.kBorderGrey),
+                                    borderRadius: BorderRadius.circular(
+                                        RadiusConstants.kBarRadius),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: LinearProgressIndicator(
+                                          value: (_currentQuestion + 1) /
+                                              response.questions!.length,
+                                          minHeight: 10,
+                                          color: AppColors.kOrange,
+                                          backgroundColor:
+                                              AppColors.kBorderGrey,
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(
+                                                  RadiusConstants.kBarRadius)),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "${_currentQuestion + 1}/${response.questions!.length}",
+                                        style: const TextStyle(
+                                            color: AppColors.kBlueFont,
+                                            fontSize: 12),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(
-                            width: 10,
+                            height: 30,
                           ),
+
+                          ///QUESTION CARD
                           Expanded(
+                            key: UniqueKey(),
+                            child: McqQuestion(
+                              question: response.questions![_currentQuestion],
+                            ),
+                            //child: TrueFalseQuestion(),
+                          ),
+
+                          ///NEXT BUTTON
+                          GestureDetector(
+                            onTap: () {
+                              Provider.of<ScoreProvider>(context, listen: false)
+                                  .revealAnswers = false;
+
+                              if (_currentQuestion + 1 ==
+                                  response.questions!.length) {
+                                Navigator.pushNamed(
+                                    context, Routes.quizEndScreen);
+                              } else {
+                                _currentQuestion++;
+                                setState(() {});
+                              }
+                            },
                             child: Container(
-                              height: 34,
                               padding: const EdgeInsets.symmetric(
-                                  vertical: 0, horizontal: 10),
+                                  vertical: 15, horizontal: 10),
                               decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: AppColors.kBorderGrey),
-                                borderRadius: BorderRadius.circular(
-                                    RadiusConstants.kBarRadius),
-                              ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: LinearProgressIndicator(
-                                      value: (_currentQuestion + 1) /
-                                          response.questions!.length,
-                                      minHeight: 10,
-                                      color: AppColors.kOrange,
-                                      backgroundColor: AppColors.kBorderGrey,
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(
-                                              RadiusConstants.kBarRadius)),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    "${_currentQuestion + 1}/${response.questions!.length}",
-                                    style: const TextStyle(
-                                        color: AppColors.kBlueFont,
-                                        fontSize: 12),
-                                  )
-                                ],
+                                  color: AppColors.kBlueFont,
+                                  borderRadius: BorderRadius.circular(
+                                      RadiusConstants.kCommonRadius)),
+                              child: const Center(
+                                child: Text(
+                                  Strings.kNext,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ),
                             ),
-                          ),
+                          )
                         ],
                       ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-
-                      ///QUESTION CARD
-                      Expanded(
-                        key: UniqueKey(),
-                        child: McqQuestion(
-                          question: response.questions![_currentQuestion],
-                        ),
-                        //child: TrueFalseQuestion(),
-                      ),
-
-                      ///NEXT BUTTON
-                      GestureDetector(
-                        onTap: () {
-                          Provider.of<ScoreProvider>(context, listen: false)
-                              .revealAnswers = false;
-
-                          if (_currentQuestion + 1 ==
-                              response.questions!.length) {
-                            Navigator.pushNamed(context, Routes.quizEndScreen);
-                          } else {
-                            _currentQuestion++;
-                            setState(() {});
-                          }
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 10),
-                          decoration: BoxDecoration(
-                              color: AppColors.kBlueFont,
-                              borderRadius: BorderRadius.circular(
-                                  RadiusConstants.kCommonRadius)),
-                          child: const Center(
-                            child: Text(
-                              Strings.kNext,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                    ),
         ),
       ),
     );

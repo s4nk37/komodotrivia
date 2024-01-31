@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:komodotrivia/utils/theme.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/score_provider.dart';
@@ -7,6 +6,7 @@ import '../../../utils/constants/layout_constants.dart';
 import '../../../utils/constants/textstyle_constants.dart';
 import '../../../generated/assets.dart';
 import '../../../utils/constants/strings_constants.dart';
+import '../../../utils/theme.dart';
 import 'quiz_category_card.dart';
 
 class HomeScreen extends StatefulWidget {

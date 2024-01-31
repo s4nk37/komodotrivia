@@ -25,4 +25,6 @@ class Strings {
       "You have unsaved changes. Are you sure you want to discard them?";
   static const String kDiscard = "Discard";
   static const String kCancel = "Cancel";
+  static const String kPleaseCheckYourInternetConnection =
+      "Please check your internet connection.";
 }
