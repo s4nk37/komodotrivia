@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${Strings.kHi} Komodo!',
+                        '${Strings.kHi} there!',
                         style: kLargeTitle.copyWith(
                           color: theme.onBackground,
                         ),

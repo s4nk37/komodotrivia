@@ -49,6 +49,8 @@ class MyApp extends StatelessWidget {
           theme: lightTheme,
           darkTheme: darkTheme,
           themeMode: theme.isDarkTheme ? ThemeMode.dark : ThemeMode.light,
+          themeAnimationDuration: const Duration(milliseconds: 800),
+          themeAnimationCurve: Curves.ease,
           routes: Routes.routes,
           initialRoute: Routes.homeScreen,
           debugShowCheckedModeBanner: false,
