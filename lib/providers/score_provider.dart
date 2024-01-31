@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:komodotrivia/utils/configs/app_config.dart';
+
+import '../utils/constants/strings_constants.dart';
 
 class ScoreProvider with ChangeNotifier {
   int totalQuestions = 0;
@@ -7,6 +10,21 @@ class ScoreProvider with ChangeNotifier {
   int _points = 0;
   String ranking = "D";
   int currentCategory = 0; //total points
+
+  ScoreProvider() {
+    getScoresAtInit();
+  }
+
+  getScoresAtInit() {
+    _points = prefs.getInt(Strings.kPoints) ?? 0;
+    ranking = prefs.getString(Strings.kRanking) ?? "D";
+    categoryPoints[21] = prefs.getInt("21") ?? 0;
+    categoryPoints[22] = prefs.getInt("22") ?? 0;
+    categoryPoints[23] = prefs.getInt("23") ?? 0;
+    categoryPoints[19] = prefs.getInt("19") ?? 0;
+    categoryPoints[17] = prefs.getInt("17") ?? 0;
+    notifyListeners();
+  }
 
   int get points => _points;
 
@@ -63,6 +81,13 @@ class ScoreProvider with ChangeNotifier {
       ranking = 'F';
     }
     print(_points);
+    prefs.setInt(Strings.kPoints, _points);
+    prefs.setInt("21", categoryPoints[21]!);
+    prefs.setInt("22", categoryPoints[22]!);
+    prefs.setInt("23", categoryPoints[23]!);
+    prefs.setInt("19", categoryPoints[19]!);
+    prefs.setInt("17", categoryPoints[17]!);
+    prefs.setString(Strings.kRanking, ranking);
     notifyListeners();
   }
 }

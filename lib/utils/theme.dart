@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'configs/app_config.dart';
 import 'constants/colors_constants.dart';
+import 'constants/strings_constants.dart';
 
 final ThemeData lightTheme = ThemeData(
   fontFamily: kAppFont,
@@ -11,6 +12,20 @@ final ThemeData lightTheme = ThemeData(
     backgroundColor: AppColors.kBgWhite,
     elevation: 0,
     iconTheme: IconThemeData(color: AppColors.kFontBlack),
+  ),
+  dialogTheme: const DialogTheme(
+    backgroundColor: AppColors.kBgWhite,
+    elevation: 0,
+    titleTextStyle: TextStyle(
+      color: AppColors.kFontBlack,
+      fontSize: 20,
+      fontWeight: FontWeight.w700,
+    ),
+    contentTextStyle: TextStyle(
+      color: AppColors.kFontBlack,
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    ),
   ),
   iconTheme: const IconThemeData(color: AppColors.kFontBlack),
   canvasColor: AppColors.kBgWhite,
@@ -41,6 +56,20 @@ final ThemeData darkTheme = ThemeData(
     elevation: 0,
     iconTheme: IconThemeData(color: AppColors.kFontWhite),
   ),
+  dialogTheme: const DialogTheme(
+    backgroundColor: AppColors.kBgWhite,
+    elevation: 0,
+    titleTextStyle: TextStyle(
+      color: AppColors.kFontBlack,
+      fontSize: 20,
+      fontWeight: FontWeight.w700,
+    ),
+    contentTextStyle: TextStyle(
+      color: AppColors.kFontBlack,
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    ),
+  ),
   iconTheme: const IconThemeData(color: AppColors.kFontWhite),
   canvasColor: AppColors.kBgBlack,
   colorScheme: const ColorScheme.dark(
@@ -68,9 +97,19 @@ class ThemeProvider extends ChangeNotifier {
 
   ThemeData get currentTheme => _isDarkTheme ? darkTheme : lightTheme;
 
+  ThemeProvider() {
+    getThemeAtInit();
+  }
+
+  getThemeAtInit() async {
+    _isDarkTheme = prefs.getBool(Strings.isDarkMode) ?? false;
+    notifyListeners();
+  }
+
   void toggleTheme() {
     _isDarkTheme = !_isDarkTheme;
     print("Theme changed to: ${_isDarkTheme ? 'Dark' : 'Light'}");
+    prefs.setBool(Strings.isDarkMode, _isDarkTheme);
     notifyListeners();
   }
 }

@@ -1,5 +1,6 @@
 class Strings {
   static const String kHi = "Hi,";
+  static const String isDarkMode = "isDarkMode";
   static const String kLetsmakethisdayproductive =
       "Let's make this day productive!";
   static const String kRanking = "Ranking";

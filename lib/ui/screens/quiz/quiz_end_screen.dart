@@ -30,7 +30,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           leading: GestureDetector(
-            child: const Icon(Icons.arrow_back_ios, color: AppColors.kBlueFont),
+            child: const Icon(Icons.arrow_back_ios, color: AppColors.kBgWhite),
             onTap: () {
               scoreProvider.updatePoints();
               Navigator.popUntil(context, (route) => route.isFirst);
@@ -51,7 +51,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
                       Text(
                         Strings.kCongratulations,
                         style: TextStyle(
-                            color: AppColors.kBlueFont.withOpacity(0.9),
+                            color: AppColors.kBgWhite.withOpacity(0.9),
                             fontWeight: FontWeight.w700,
                             fontSize: 30),
                       ),
@@ -106,7 +106,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
 class HeaderCurvedContainer extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = AppColors.kRedBg;
+    Paint paint = Paint()..color = AppColors.kOrange;
     Path path = Path()
       ..relativeLineTo(0, 400)
       ..quadraticBezierTo(size.width / 2, 300.0, size.width, 400)

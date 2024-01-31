@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:komodotrivia/utils/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -10,6 +9,7 @@ import '../../../utils/constants/layout_constants.dart';
 import '../../../utils/constants/colors_constants.dart';
 import '../../../utils/constants/strings_constants.dart';
 import '../../../utils/routes.dart';
+import '../../../utils/theme.dart';
 import 'mcq_question.dart';
 
 class QuestionScreen extends StatefulWidget {
