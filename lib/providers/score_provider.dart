@@ -80,7 +80,7 @@ class ScoreProvider with ChangeNotifier {
     } else {
       ranking = 'F';
     }
-    print(_points);
+
     prefs.setInt(Strings.kPoints, _points);
     prefs.setInt("21", categoryPoints[21]!);
     prefs.setInt("22", categoryPoints[22]!);

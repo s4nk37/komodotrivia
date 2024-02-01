@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/score_provider.dart';
@@ -29,6 +30,12 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: AppColors.kOrange,
+            statusBarIconBrightness: theme.brightness == Brightness.light
+                ? Brightness.light
+                : Brightness.dark,
+          ),
           leading: GestureDetector(
             child: const Icon(Icons.arrow_back_ios, color: AppColors.kBgWhite),
             onTap: () {

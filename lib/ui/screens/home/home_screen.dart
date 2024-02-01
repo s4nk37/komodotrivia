@@ -139,7 +139,8 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 24),
               Expanded(
                 child: GridView.count(
-                  padding: const EdgeInsets.only(top: 20, right: 10, left: 10),
+                  padding: const EdgeInsets.only(
+                      top: 20, right: 10, left: 10, bottom: 20),
                   crossAxisCount: 2,
                   crossAxisSpacing: 17,
                   mainAxisSpacing: 29,

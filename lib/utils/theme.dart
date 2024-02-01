@@ -1,9 +1,50 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'configs/app_config.dart';
 import 'constants/colors_constants.dart';
 import 'constants/strings_constants.dart';
+
+class ThemeProvider extends ChangeNotifier {
+  bool _isDarkTheme = false;
+
+  bool get isDarkTheme => _isDarkTheme;
+
+  ThemeData get currentTheme => _isDarkTheme ? darkTheme : lightTheme;
+
+  ThemeProvider() {
+    getThemeAtInit();
+  }
+
+  getThemeAtInit() async {
+    _isDarkTheme = prefs.getBool(Strings.isDarkMode) ?? false;
+    setStatusBarTheme();
+    notifyListeners();
+  }
+
+  void toggleTheme() {
+    _isDarkTheme = !_isDarkTheme;
+    setStatusBarTheme();
+    if (kDebugMode) {
+      print("Theme changed to: ${_isDarkTheme ? 'Dark' : 'Light'}");
+    }
+    prefs.setBool(Strings.isDarkMode, _isDarkTheme);
+    notifyListeners();
+  }
+
+  void setStatusBarTheme() {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.light.copyWith(
+        statusBarBrightness: _isDarkTheme ? Brightness.light : Brightness.dark,
+        statusBarIconBrightness:
+            _isDarkTheme ? Brightness.light : Brightness.dark,
+        systemStatusBarContrastEnforced: true,
+        statusBarColor: _isDarkTheme ? AppColors.kBgBlack : AppColors.kBgWhite,
+      ),
+    );
+  }
+}
 
 final ThemeData lightTheme = ThemeData(
   fontFamily: kAppFont,
@@ -90,36 +131,3 @@ final ThemeData darkTheme = ThemeData(
     onSurface: AppColors.kFontWhite,
   ),
 );
-
-class ThemeProvider extends ChangeNotifier {
-  bool _isDarkTheme = false;
-
-  bool get isDarkTheme => _isDarkTheme;
-
-  ThemeData get currentTheme => _isDarkTheme ? darkTheme : lightTheme;
-
-  ThemeProvider() {
-    getThemeAtInit();
-  }
-
-  getThemeAtInit() async {
-    _isDarkTheme = prefs.getBool(Strings.isDarkMode) ?? false;
-    notifyListeners();
-  }
-
-  void toggleTheme() {
-    _isDarkTheme = !_isDarkTheme;
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: _isDarkTheme ? Brightness.light : Brightness.dark,
-        statusBarIconBrightness:
-            _isDarkTheme ? Brightness.light : Brightness.dark,
-        systemStatusBarContrastEnforced: true,
-        statusBarColor: _isDarkTheme ? AppColors.kBgBlack : AppColors.kBgWhite,
-      ),
-    );
-    print("Theme changed to: ${_isDarkTheme ? 'Dark' : 'Light'}");
-    prefs.setBool(Strings.isDarkMode, _isDarkTheme);
-    notifyListeners();
-  }
-}
