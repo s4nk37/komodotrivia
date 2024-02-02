@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'providers/question_provider.dart';
 import 'providers/score_provider.dart';
-import 'ui/screens/home/home_screen.dart';
 import 'utils/configs/app_config.dart';
 import 'utils/routes.dart';
 import 'utils/theme.dart';
