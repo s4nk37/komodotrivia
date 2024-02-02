@@ -2,6 +2,8 @@
 
 Quiz app
 
+![Mockup-01](https://github.com/s4nk37/komodotrivia/assets/44511437/bc4f31fd-2096-41d5-abd2-1d7aec1b5c11)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
