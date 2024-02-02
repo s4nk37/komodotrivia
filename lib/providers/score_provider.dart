@@ -66,20 +66,58 @@ class ScoreProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  List<int> thresholds = [
+    1170, // A+
+    1070, // A
+    970, // A-
+    870, // B+
+    770, // B
+    670, // B-
+    570, // C+
+    470, // C
+    370, // C-
+    270, // D+
+    170, // D
+    0, // F
+  ];
+
+// Function to calculate grade based on points
+  String calculateGrade(int points) {
+    if (points < 0 || points > 1300) {
+      throw ArgumentError('Points must be between 0 and 1300.');
+    }
+
+    // Linear search (optimized for efficiency)
+    for (int i = 0; i < thresholds.length; i++) {
+      if (points >= thresholds[i]) {
+        return grades[i];
+      }
+    }
+
+    // Should never reach here, but ensure safety
+    return 'F';
+  }
+
+// Define grade letter mappings (can be easily modified)
+  List<String> grades = [
+    'A+',
+    'A',
+    'A-',
+    'B+',
+    'B',
+    'B-',
+    'C+',
+    'C',
+    'C-',
+    'D+',
+    'D',
+    'F',
+  ];
+
   void updatePoints() {
     categoryPoints[currentCategory] = correctAnswers * 10;
     _points = categoryPoints.values.reduce((a, b) => a + b);
-    if (_points >= 9000) {
-      ranking = 'A';
-    } else if (_points >= 8000) {
-      ranking = 'B';
-    } else if (_points >= 7000) {
-      ranking = 'C';
-    } else if (_points >= 6000) {
-      ranking = 'D';
-    } else {
-      ranking = 'F';
-    }
+    ranking = calculateGrade(points);
 
     prefs.setInt(Strings.kPoints, _points);
     prefs.setInt("21", categoryPoints[21]!);
