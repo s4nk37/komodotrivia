@@ -9,7 +9,7 @@ import '../../../utils/constants/colors_constants.dart';
 import '../../../utils/constants/strings_constants.dart';
 import '../../../utils/routes.dart';
 import '../../../utils/theme.dart';
-import '../../widgets/internet_error.dart';
+import '../../commons/internet_error.dart';
 import 'mcq_question.dart';
 
 class QuestionScreen extends StatefulWidget {
