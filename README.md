@@ -1,18 +1,12 @@
-# komodotrivia
+# Komodo Trivia
 
-Quiz app
+Quiz app built using Open Trivia db api, with features like theme selection, MCQ, True false question and scores.
 
 ![Mockup-01](https://github.com/s4nk37/komodotrivia/assets/44511437/bc4f31fd-2096-41d5-abd2-1d7aec1b5c11)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1) Clone the Repository: Use Git to clone this repository locally.
+2) Install Dependencies: Run `flutter pub get` to install all required packages.
+3) Run the App: Connect your device or start an emulator, and run `flutter run` to launch the app.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
