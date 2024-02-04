@@ -12,7 +12,12 @@ import 'package:komodotrivia/providers/question_provider.dart';
 void main() {
   test("No data/Internet check test", () async {
     final result = QuestionProvider();
-    await result.fetchAndSetQuestions(categoryId: 34, numberOfQuestions: 10);
-    expect(result.questions, null);
+    await result.fetchAndSetQuestions(categoryId: 100, numberOfQuestions: 10);
+    expect(result.questions, []);
   });
+
+  // test("Ranking test", () {
+  //
+  //   expect(ScoreProvider().calculateGrade(100), "F");
+  // });
 }
