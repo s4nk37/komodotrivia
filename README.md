@@ -6,7 +6,7 @@ Quiz app built using Open Trivia db api, with features like theme selection, MCQ
 
 ## Folder Structure
 
-.
+`.
 ├── generated
 │   └── assets.dart
 ├── main.dart
@@ -45,7 +45,7 @@ Quiz app built using Open Trivia db api, with features like theme selection, MCQ
 ├── styles
 │   └── simple_shadow.dart
 ├── theme.dart
-└── validations
+└── validations`
 
 
 ## Getting Started
